@@ -75,7 +75,7 @@ onMounted(() => {
       <el-col :span="16">
         <el-card>
           <template #header>
-            <strong class="tracking-widest">通知公告</strong>
+            <strong class="tracking-widest">通知公告11</strong>
           </template>
           <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
             <div v-for="item in noticeList" :key="item.ID"
