@@ -1,4 +1,4 @@
-import { createRouter, createWebHistory } from 'vue-router'
+import { createRouter, createWebHashHistory } from 'vue-router'
 import baseRoutes from './base'
 import { useRouteStore } from '@/stores/modules/route'
 import useAuth from '@/hooks/useAuth'
@@ -13,7 +13,7 @@ export const WHITE_LIST = []
 
 const router = createRouter({
   // 使用HTML5模式，正式环境服务器配置查看：https://router.vuejs.org/zh/guide/essentials/history-mode.html
-  history: createWebHistory(import.meta.env.VITE_APP_BASE_PATH),
+  history: createWebHashHistory(import.meta.env.VITE_APP_BASE_PATH),
   routes: baseRoutes,
 })
 // console.log(baseRoutes,"baseRoutes");
