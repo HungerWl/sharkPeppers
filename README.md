@@ -52,4 +52,61 @@
   }
 }
 ~~~
+# 路由meta说明
+
+~~~
+{
+    /**
+     * 在菜单中显示的标题。可以是定义好的多语言模板。
+     */
+    title:String, 
+    /**
+     * 在菜单中显示的图标。使用的自定义的 SvgIcon 组件渲染，可以是本地图标或网络中的资源。
+     */
+    icon:String, 
+    /**
+     * 是否在菜单中隐藏。（默认为 false）
+     */
+    isHide: Boolean, 
+    /**
+     * 是否在菜单中隐藏所有子级（默认为 false）。
+     * 当为true时，所有子级的isHide和hideChildren都会被动态赋值为true
+     */
+    hideChildren: Boolean, 
+    /**
+     * 如果有值并以 http: 或 https: 开头，则以外链内嵌方式打开（默认无）
+     */
+    iframeLink:String, 
+    /**
+     * 在 layout 框架外打开（默认为 false）。
+     * 如数据大屏等。
+     * 具有传递性，影响子路由。
+     */
+    isOuter:Boolean, 
+    /**
+     * 可以访问的角色编码（默认无）。
+     * 为 [] 时所有角色都不可以访问，为空值时所有角色都可以访问
+     * 具有传递性，影响子路由。
+     * 当没有权限访问时，此路由的isHide和hideChildren会被动态赋值为true
+     */
+    roles:Array|String, 
+    /**
+     * 是否缓存组件实例（默认为 false）。
+     * 注意：组件名要与对应路由的 name 相同
+     */
+    isKeep:Boolean, 
+    /**
+     * 多标签页模式下是否固定在标签页（默认 false）。
+     */
+    fixedTab: Boolean,
+    /**
+     * 单独配置此页面的过渡动画（默认无）。
+     */
+    transition:String, 
+    /**
+     *  排序号（默认无）
+     */
+    sortNo:Number,
+}
+~~~
 

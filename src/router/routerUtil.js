@@ -4,6 +4,8 @@ import { notFound } from '@/router/base'
 
 const { sort, foreach, forEach, listToTree } = useCutTree({ id: 'path', children: 'children', parentId: 'parentPath' })
 const allViews = import.meta.glob('/src/views/**/*.vue')
+
+
 /**
  * 菜单排序
  * @param {*[]} menus 菜单
@@ -56,7 +58,6 @@ function getMenus(routes, hasRole) {
       else
         route.children.forEach(item => item.parentPath = null)
     }
-
     menuList.push(route)
   })
 
@@ -111,11 +112,9 @@ function handleComponent(route, hasRole) {
     route.component = () => import('@/layout/main/LayoutIframe.vue')
   }
   else if (route.component && typeof (route.component) === 'string') {
-    const url = route.component.endsWith('.vue')
-      ? `/src/views/${route.component}`
-      : `/src/views/${route.component}.vue`
-    // route.component = () => import(/* @vite-ignore */url)
-    route.component = allViews[url]
+    const url = `/src/views/${route.component}/index.vue`
+    route.component = allViews[url];
+    // console.log(route.component);
   }
 }
 

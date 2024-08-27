@@ -90,4 +90,298 @@ export default [
       }
     },
   },
+  // 菜单
+  {
+    url: `${baseApi}/main/index`,
+    method: 'post',
+    response: () => {
+      return {
+        status: 200,
+        data: [
+          {
+            "path": "/archiveStatistics",
+            "name": "ArchiveStatistics",
+            "component": "archiveStatistics",
+            "meta": {
+              "title": "menus.archiveStatistics",
+              "isHide": false,
+              "icon": "icon-dangantongji",
+              "fixedTab": false,
+              "sortNo": 11
+            },
+            "children": [
+              {
+                "path": "/archiveStatistics/visualizeStatistics",
+                "name": "VisualizeStatistics",
+                "component": "visualizeStatistics",
+                "meta": {
+                  "title": "menus.visualizeStatistics",
+                  "isHide": false,
+                  "icon": "icon-shujufenxi",
+                  "fixedTab": false,
+                  "sortNo": 11
+                }
+              },
+              {
+                "path": "/archiveStatistics/basicStatistics",
+                "component": "basicStatistics",
+                "name": "BasicStatistics",
+                "meta": {
+                  "title": "menus.basicStatistics",
+                  "isHide": false,
+                  "icon": "icon-tongjifenxi",
+                  "fixedTab": false,
+                  "sortNo": 12
+                }
+              }
+            ]
+          },
+          {
+            "path": "/archivesCompilationAndResearch",
+            "name": "ArchivesCompilationAndResearch",
+            "component": "archivesCompilationAndResearch",
+            "meta": {
+              "title": "menus.archivesCompilationAndResearch",
+              "isHide": false,
+              "icon": "icon-zhuanxiangyanshou",
+              "fixedTab": false,
+              "sortNo": 11
+            }
+          },
+          {
+            "path": "/collectionLibrary",
+            "name": "CollectionLibrary",
+            "component": "collectionLibrary",
+            "meta": {
+              "title": "menus.collectionLibrary",
+              "isHide": false,
+              "icon": "icon-baozhuangyinshua",
+              "fixedTab": false,
+              "sortNo": 6
+            }
+          },
+          {
+            "path": "/fileSearch",
+            "name": "FileSearch",
+            "component": "fileSearch",
+            "meta": {
+              "title": "menus.fileSearch",
+              "isHide": false,
+              "icon": "icon-wenzhanghuoke-",
+              "fixedTab": false,
+              "sortNo": 5
+            }
+          },
+          {
+            "path": "/home",
+            "name": "Home",
+            "component": "home",
+            "meta": {
+              "title": "menus.home",
+              "isHide": false,
+              "icon": "icon-tongjizhongxin",
+              "fixedTab": false,
+              "sortNo": 1
+            }
+          },
+          {
+            "path": "/organizeLibrary",
+            "name": "OrganizeLibrary",
+            "component": "organizeLibrary",
+            "meta": {
+              "title": "menus.organizeLibrary",
+              "isHide": false,
+              "icon": "organizeLibrary",
+              "fixedTab": false,
+              "sortNo": 2
+            }
+          },
+          {
+            "path": "/permanentLibrary",
+            "name": "PermanentLibrary",
+            "component": "permanentLibrary",
+            "meta": {
+              "title": "menus.permanentLibrary",
+              "isHide": false,
+              "icon": "icon-sw_iconset_2003shebeishuju",
+              "fixedTab": false,
+              "sortNo": 11
+            }
+          },
+          {
+            "path": "/personalCenter",
+            "name": "PersonalCenter",
+            "component": "personalCenter",
+            "meta": {
+              "title": "menus.personalCenter",
+              "isHide": false,
+              "icon": "icon-gerenzhongxin",
+              "fixedTab": false,
+              "sortNo": 20
+            },
+            "children": [
+              {
+                "path": "/personalCenter/myProfile",
+                "name": "myProfile",
+                "component": "myProfile",
+                "meta": {
+                  "title": "menus.myProfile",
+                  "isHide": false,
+                  "icon": "icon-wodeziliao",
+                  "fixedTab": false,
+                  "sortNo": 1
+                }
+              },
+              {
+                "path": "/personalCenter/myBorrowing",
+                "name": "myBorrowing",
+                "component": "myBorrowing",
+                "meta": {
+                  "title": "menus.myBorrowing",
+                  "isHide": false,
+                  "icon": "icon-wodejieyue",
+                  "fixedTab": false,
+                  "sortNo": 2
+                }
+              },
+              {
+                "path": "/personalCenter/myTask",
+                "name": "myTask",
+                "component": "myTask",
+                "meta": {
+                  "title": "menus.myTask",
+                  "isHide": false,
+                  "icon": "icon-woderenwu",
+                  "fixedTab": false,
+                  "sortNo": 3
+                }
+              }
+            ]
+          },
+          {
+            "path": "/serviceUtilization",
+            "name": "ServiceUtilization",
+            "component": "serviceUtilization",
+            "meta": {
+              "title": "menus.serviceUtilization",
+              "isHide": false,
+              "icon": "icon-fuwu_o",
+              "fixedTab": false,
+              "sortNo": 6
+            }
+          },
+          {
+            "path": "/system",
+            "name": "System",
+            "component": "system",
+            "meta": {
+              "title": "menus.system",
+              "isHide": false,
+              "icon": "icon-xitongguanli",
+              "fixedTab": false,
+              "sortNo": 3
+            },
+            "children": [
+              {
+                "path": "/system/defaultButtonManagement",
+                "name": "DefaultButtonManagement",
+                "component": "defaultButtonManagement",
+                "meta": {
+                  "title": "menus.defaultButtonManagement",
+                  "isHide": false,
+                  "icon": "icon-anniuguanli",
+                  "fixedTab": false,
+                  "sortNo": 1
+                }
+              },
+              {
+                "path": "/system/templateManagement",
+                "name": "TemplateManagement",
+                "component": "templateManagement",
+                "meta": {
+                  "title": "menus.templateManagement",
+                  "isHide": false,
+                  "icon": "icon-wodemoban",
+                  "fixedTab": false,
+                  "sortNo": 2
+                }
+              },
+              {
+                "path": "/system/notificationAnnouncement",
+                "name": "NotificationAnnouncement",
+                "component": "notificationAnnouncement",
+                "meta": {
+                  "title": "menus.notificationAnnouncement",
+                  "isHide": false,
+                  "icon": "icon-tongzhigonggao",
+                  "fixedTab": false,
+                  "sortNo": 3
+                }
+              },
+              {
+                "path": "/system/menuManagement",
+                "name": "MenuManagement",
+                "component": "menuManagement",
+                "meta": {
+                  "title": "menus.menuManagement",
+                  "isHide": false,
+                  "icon": "icon-caidanguanli",
+                  "fixedTab": false,
+                  "sortNo": 4
+                }
+              },
+              {
+                "path": "/system/archiveChapterSettings",
+                "name": "ArchiveChapterSettings",
+                "component": "archiveChapterSettings",
+                "meta": {
+                  "title": "menus.archiveChapterSettings",
+                  "isHide": false,
+                  "icon": "icon-guidang",
+                  "fixedTab": false,
+                  "sortNo": 5
+                }
+              },
+              {
+                "path": "/system/roleManagement",
+                "name": "RoleManagement",
+                "component": "roleManagement",
+                "meta": {
+                  "title": "menus.roleManagement",
+                  "isHide": false,
+                  "icon": "icon-navicon-jsgl",
+                  "fixedTab": false,
+                  "sortNo": 6
+                }
+              },
+              {
+                "path": "/system/institutionalSectorManagement",
+                "name": "InstitutionalSectorManagement",
+                "component": "institutionalSectorManagement",
+                "meta": {
+                  "title": "menus.institutionalSectorManagement",
+                  "isHide": false,
+                  "icon": "icon-jigouguanli",
+                  "fixedTab": false,
+                  "sortNo": 7
+                }
+              }
+            ]
+          },
+          {
+            "path": "/warehouseManagement",
+            "name": "WarehouseManagement",
+            "component": "warehouseManagement",
+            "meta": {
+              "title": "menus.warehouseManagement",
+              "isHide": false,
+              "icon": "icon-kufangguanli",
+              "fixedTab": false,
+              "sortNo": 4
+            }
+          },
+        ]
+      }
+    }
+  }
 ]
