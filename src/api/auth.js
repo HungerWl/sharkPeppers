@@ -25,3 +25,14 @@ export async function userInfoApi(data) {
     ElMessage.error(error.message)
   }
 }
+
+// 菜单
+export async function menuListApi(data) {
+  try {
+    let response = await post({}, '/main/index', data)
+    if (response.status !== 200) ElMessage.error(response.message)
+    return response.data
+  } catch (error) {
+    ElMessage.error(error.message)
+  }
+}

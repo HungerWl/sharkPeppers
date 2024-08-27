@@ -5,9 +5,8 @@ import useAuth from '@/hooks/useAuth'
 import { t } from '@/i18n'
 import { useAppStore } from '@/stores/modules/app'
 import { useUserStore } from '@/stores/modules/user'
-import usePageLoading from '@/utils/pageLoading'
 import { userInfoApi } from '@/api/auth'
-import { has } from 'lodash'
+
 
 // 路由白名单
 export const WHITE_LIST = []

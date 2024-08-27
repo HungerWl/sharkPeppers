@@ -4,9 +4,9 @@ import router from '@/router'
 import useAuth from '@/hooks/useAuth'
 import appConfig from '@/appConfig'
 import routeModuleList from '@/router/modules'
-import { useUserStore } from '@/stores/modules/user'
 import { rootRoute } from '@/router/base'
-import { getHomePath, getMenus, handleRoutes } from '@/router/routerUtil'
+import { getMenus, handleRoutes } from '@/router/routerUtil'
+import { menuListApi } from '@/api/auth'
 
 const { routeSource, innerNotFound } = appConfig
 
@@ -32,16 +32,11 @@ export const useRouteStore = defineStore('route', () => {
       routes = routeModuleList
     }
     else if (routeSource === 'backend') {
-      routes = res.data
+      let data = await menuListApi()
+      routes = data
     }
     const { hasRole } = useAuth()
     let routeMap = handleRoutes(routes, hasRole, innerNotFound)
-    // routeMap = {
-    //   keepAliveViews: [],
-    //   fiexTabsRoutes: [],
-    //   outerRoutes: [],
-    //   innerRoutes: []
-    // }
     // 获取homePath
     // rootRoute.redirect = getHomePath(useUserStore().userInfo)
     rootRoute.redirect = "/home"
@@ -51,8 +46,8 @@ export const useRouteStore = defineStore('route', () => {
     fiexTabsRoutes.value = routeMap.fiexTabsRoutes
     // 添加路由到路由器
     rootRoute.children = [...routeMap.innerRoutes]
-    // console.log(rootRoute);
-    
+
+
     router.addRoute(rootRoute)
     // 提升需要在 layout 框架外显示的路由与 root 路由平级
     routeMap.outerRoutes.forEach((outRoute) => {
@@ -60,6 +55,7 @@ export const useRouteStore = defineStore('route', () => {
     })
     // 获取菜单
     menus.value = getMenus(routes, hasRole)
+
   }
 
   // 使用 setup 语法糖的 pinia 自己实现 $reset 方法
