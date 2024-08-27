@@ -1,1 +1,0 @@
-import{_ as o,r as a,o as t,c,w as n,a as r}from"./index-wVR_07H2.js";const s={};function _(f,d){const e=a("el-main");return t(),c(e,{class:"fv-error-404"},{default:n(()=>[r(" 404 ")]),_:1})}const m=o(s,[["render",_],["__scopeId","data-v-390ea5ef"]]);export{m as default};
