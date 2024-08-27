@@ -114,8 +114,7 @@ function handleComponent(route, hasRole) {
   else if (route.component && typeof (route.component) === 'string') {
     const url = `/src/views/${route.component}/index.vue`
     route.component = allViews[url];
-    console.log(route.component);
-
+    // console.log(route.component);
   }
 }
 
