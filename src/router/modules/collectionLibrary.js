@@ -2,7 +2,7 @@
 export default {
     path: '/collectionLibrary',
     name: 'CollectionLibrary',
-    // component: () => import('@/views/home/index.vue'),
+    component: () => import('@/views/collectionLibrary/index.vue'),
     meta: {
         title: 'menus.collectionLibrary',
         isHide: false,

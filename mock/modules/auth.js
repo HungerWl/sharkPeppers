@@ -157,7 +157,7 @@ export default [
               "isHide": false,
               "icon": "icon-baozhuangyinshua",
               "fixedTab": false,
-              "sortNo": 6
+              "sortNo": 2
             }
           },
           {
@@ -205,7 +205,7 @@ export default [
               "isHide": false,
               "icon": "icon-sw_iconset_2003shebeishuju",
               "fixedTab": false,
-              "sortNo": 11
+              "sortNo": 3
             }
           },
           {
