@@ -11,3 +11,13 @@ export async function getMenu(data) {
         ElMessage.error(error.message)
     }
 }
+// 表格数据
+export async function getTable(data) {
+    try {
+        let response = await post({}, 'usercustom/customList', data)
+        if (response.result !== 'success') ElMessage.error(response.Msg || response.msg)
+        return response
+    } catch (error) {
+        ElMessage.error(error.message)
+    }
+}

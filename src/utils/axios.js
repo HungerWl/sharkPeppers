@@ -28,6 +28,7 @@ axiosInstance.interceptors.response.use(
     if (response.status === 200) {
       return response.data;
     }
+
     ElMessage({
       message: response.message,
       type: 'error'
@@ -36,6 +37,9 @@ axiosInstance.interceptors.response.use(
   },
   (error) => {
     const { response } = error;
+    // if (response.status === 400) {
+    //   return window.location.href = "/public/logo.svg";
+    // }
     if (response) {
       ElMessage({
         message: response.status,

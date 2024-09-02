@@ -105,7 +105,7 @@ export default {
    * 'frontend' 前端加载
    * 'backend' 后端加载
    */
-  routeSource: routeSources[1].value,
+  routeSource: routeSources[0].value,
 
   // 动态 html 标题
   dynamicTitle: true,

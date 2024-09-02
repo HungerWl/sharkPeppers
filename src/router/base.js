@@ -22,6 +22,15 @@ const baseRoutes = [
     name: 'Login',
     component: () => import('@/views/login/index.vue'),
   },
+  //插件路由
+  {
+    path: '/attachePreview',
+    name: 'AttachePreview',
+    component: () => import('@/components/attache-preview/index.vue'),
+    meta: {
+      title: '附件预览',
+    },
+  },
   notFound,
 ]
 

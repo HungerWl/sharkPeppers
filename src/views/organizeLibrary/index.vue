@@ -1,97 +1,141 @@
-// 整理库
 <template>
-    <el-main id="collectionLibrary">
-        <!-- 档案目录 -->
-        <div class="border w-72 h-full flex-shrink-0 p-2 bg-[#f2e6d8]" :class="themeClass">
-            <div class="title pb-2">
+
+    <el-container id="collectionLibrary" class="p-2">
+        <el-aside width="300px" class="left p-2 bg-[#f2e6d8]">
+            <div class="title pb-2 text-[20px] font-bold border-b-[1px] border-[#ccc]">
                 <span>档案目录</span>
+            </div>
+            <div class="directory-btns mb-1">
+                <el-button type="primary" link @click="directoryFnc(0)">档案分类</el-button>
+                <el-button type="primary" link @click="directoryFnc(1)">权限下发</el-button>
+                <el-button type="primary" link @click="directoryFnc(2)">授权</el-button>
+                <el-button type="primary" link @click="directoryFnc(3)">目录设置</el-button>
             </div>
             <el-tree style="width: 100%;overflow: auto;max-height: 80%" :data="treeData" :props="treeProps"
                 @node-click="handleNodeClick" />
-        </div>
-        <!-- right -->
-        <div class="border h-full flex-grow">
-            <!-- 功能键 -->
-            <div class="h-12 p-1 bg-[#91b7ba] flex justify-between items-center" :class="themeClass">
-                功能键
-            </div>
-            <!-- 数据条 -->
-            <div class="h-12 p-1  flex items-center">
-                <SvgIcon name="icon-data" class="w-6 h-6 mr-1" :class="themeClass"></SvgIcon>
-                <span class="mr-1">文件数量：{{ dataCounte?.fileCount }}</span>
-                <span class="mr-1">附件数量：{{ dataCounte?.attachmentCount }}</span>
-                <span class="mr-1">附件综合：{{ dataCounte?.attachmentTotal }}</span>
-            </div>
-            <!-- tab切换 -->
-            <div class="p-1">
+        </el-aside>
+        <el-container class="right">
+            <el-header>
+                <!-- 功能键 -->
+                <div class="h-[60px] bg-[#91b7ba] flex items-center">
+                    功能键
+                    <button @click="openDialog">打开弹框</button>
+                </div>
+            </el-header>
+            <el-main class="right-main">
+                <!-- tab切换 -->
                 <el-tabs tab-position="top">
                     <el-tab-pane :label="i.name" v-for="(i, idx) in tabs" :key="idx"></el-tab-pane>
                 </el-tabs>
-            </div>
-            <!-- table -->
-            <div class="p-1">
-                <el-table :data="tableData" stripe style="width: 100%" border>
+                <el-table :data="tableData" style="width: 100%; height:85%;" border>
                     <el-table-column type="index" width="50" label="#" />
-                    <el-table-column prop="date" label="Date" width="180" />
+                    <el-table-column prop="date" label="文件名称" min-width="120" show-overflow-tooltip />
+                    <el-table-column prop="date" label="档号" min-width="120" show-overflow-tooltip />
+                    <el-table-column prop="date" label="题名" min-width="120" show-overflow-tooltip />
+                    <el-table-column fixed="right" label="操作" width="280">
+                        <template #default>
+                            <el-button type="primary" @click="attachmentPreview">附件预览</el-button>
+                            <el-button type="primary">修改</el-button>
+                            <el-button type="primary">删除</el-button>
+                        </template>
+                    </el-table-column>
                 </el-table>
-            </div>
-        </div>
-    </el-main>
+                <el-pagination @size-change="size_change" @current-change="current_change"
+                    :current-page="pageObj.currentPage" :page-sizes="[10, 20, 30, 50]" :page-size="pageObj.showCount"
+                    layout=" ->, total, sizes, prev, pager, next, jumper" :total="pageObj.total" class="p-2">
+                </el-pagination>
+            </el-main>
+        </el-container>
+    </el-container>
 </template>
 
 <script setup>
-import { ref, computed, onMounted } from 'vue';
-import { useAppStore } from '@/stores/modules/app';
+import { ref } from 'vue';
 import { getMenu } from '../../api/collectionLibrary/collectionLibrary'
-import SvgIcon from '@/components/svg-icon/index.vue'
+import { useModal } from '@/hooks/useDialog';
+import { useRouter } from "vue-router"
+const router = useRouter();
+const { showModal } = useModal();
+const openDialog = () => {
+    showModal(null, {
+        title: '示例弹框', width: '600px', onClose: () => {
+            console.log('弹框已关闭，执行一些逻辑');
+            // 在这里可以执行任何关闭时的逻辑
+        },
+    },);
+};
 
-const appStore = useAppStore();
-const themeClass = computed(() => {
-    const theme = appStore.appConfig.theme;
-    return theme === 'dark' ? 'dark-theme' : 'light-theme';
-})
+// 功能键
+const directoryFnc = () => { }
 
-const userMenu = async () => {
-    let form = new FormData();
-    form.append('type', 1);
-    let res = await getMenu({ type: 1 })
-    console.log(res);
-    treeData.value = res
+const tableData = ref([])
+for (let i = 0; i < 100; i++) {
+    tableData.value.push({
+        date: '2016-05-02',
+        name: '王小虎',
+        address: '上海市普陀区金沙江路 1518 弄',
+    })
 }
-
-const dataCounte = ref({
-    fileCount: 0,
-    attachmentCount: 0,
-    attachmentTotal: 0
+const pageObj = ref({
+    currentPage: 1,
+    showCount: 50,
+    total: 0,
 })
+
+const size_change = () => { }
+const current_change = () => { }
 
 const treeData = ref([])
 const treeProps = {
     children: 'children',
     label: 'name',
 }
-
 const handleNodeClick = (data) => {
     console.log(data);
 }
+const userMenu = async () => {
+    let form = new FormData();
+    form.append('type', 1);
+    let res = await getMenu(form)
+    treeData.value = res
+}
+userMenu()
 
 const tabs = ref([{ name: "待入口" }, { name: "已入口" }, { name: "已退回" }])
 
-const tableData = ref([])
-
-onMounted(() => {
-    // 在组件挂载后执行的逻辑
-    userMenu()
-});
+// 附件预览
+const attachmentPreview = () => {
+    window.open("/sharkPeppers/#/attachePreview")
+}
 </script>
 
 <style scoped lang="scss">
 /* 默认背景和文本颜色 */
 #collectionLibrary {
-    display: flex;
+    width: 100%;
     height: 100%;
     box-sizing: border-box;
+    display: flex;
+
+    .el-header {
+        padding: 0
+    }
+
+    .el-main {
+        padding: 0;
+    }
+
+    :deep(.el-tabs__header) {
+        margin-bottom: 10px !important;
+    }
+
+    .right-main {
+        padding: 0 10px 10px 10px;
+    }
 }
+
+.directory-btns {}
+
 
 /* 暗色主题样式 */
 .dark-theme {
@@ -100,8 +144,6 @@ onMounted(() => {
     color: #fff !important;
     fill: #fff !important;
 }
-
-.light-theme {}
 
 /* 确保标题的字体颜色在不同主题下的适应 */
 .title span {
