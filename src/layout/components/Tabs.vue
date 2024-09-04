@@ -219,8 +219,10 @@ onBeforeMount(() => {
 
 <template>
   <div class="fv-tabs flex justify-between">
-    <el-tabs v-model="state.currTabPath" :type="appStore.appConfig.tabsType" class="flex-1 overflow-hidden"
-      @tab-remove="methods.removeTab" @tab-click="methods.tabClick">
+    <el-tabs
+      v-model="state.currTabPath" :type="appStore.appConfig.tabsType" class="flex-1 overflow-hidden"
+      @tab-remove="methods.removeTab" @tab-click="methods.tabClick"
+    >
       <el-tab-pane v-for="item in state.tabs" :key="item.path" :name="item.path" :closable="!item.meta?.fixedTab">
         <template #label>
           <el-dropdown trigger="contextmenu" style="color: inherit;" @command="methods.command">
@@ -289,8 +291,10 @@ onBeforeMount(() => {
     </el-tabs>
     <div class="fv-tabs-operation">
       <PageLargeScreen size="18" />
-      <el-dropdown :trigger="appStore.appConfig.trigger" @command="methods.command"
-        @visible-change="state.visible = $event">
+      <el-dropdown
+        :trigger="appStore.appConfig.trigger" @command="methods.command"
+        @visible-change="state.visible = $event"
+      >
         <div class="el-dropdown-link ">
           <el-icon size="24">
             <Transition name="scale" mode="out-in">
@@ -352,7 +356,6 @@ onBeforeMount(() => {
   background: var(--wl-tabs-bg);
   color: var(--wl-tabs-text-color);
 }
-
 
 .fv-tabs .el-tabs--border-card {
   border: 0;

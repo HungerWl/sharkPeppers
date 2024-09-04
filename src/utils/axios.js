@@ -25,53 +25,51 @@ axiosInstance.interceptors.response.use(
   (response) => {
     // console.log(response, "response");
     // 此处相当于一次响应拦截
-    if (response.status === 200) {
-      return response.data;
-    }
+    if (response.status === 200)
+      return response.data
 
     ElMessage({
       message: response.message,
-      type: 'error'
-    });
-    return response.data;
+      type: 'error',
+    })
+    return response.data
   },
   (error) => {
-    const { response } = error;
+    const { response } = error
     // if (response.status === 400) {
     //   return window.location.href = "/public/logo.svg";
     // }
     if (response) {
       ElMessage({
         message: response.status,
-        type: 'error'
-      });
-      return Promise.reject(response.data);
+        type: 'error',
+      })
+      return Promise.reject(response.data)
     }
     ElMessage({
       message: '网络连接异常,请稍后再试!',
-      type: 'error'
-    });
-
+      type: 'error',
+    })
   })
 // 此处相当于二次响应拦截
 // 为响应数据进行定制化处理
-const requestInstance = (config) => {
+function requestInstance(config) {
   return new Promise((resolve, reject) => {
     axiosInstance.request(config).then((res) => {
-      const data = res; // 如果data.code为错误代码返回message信息
+      const data = res // 如果data.code为错误代码返回message信息
       resolve(data)
-    });
-  });
-};
+    })
+  })
+}
 export function get(config, url, parms, type) {
-  return requestInstance({ ...config, url, method: 'GET', params: parms, responseType: type });
+  return requestInstance({ ...config, url, method: 'GET', params: parms, responseType: type })
 }
 export function post(config, url, data, type) {
-  return requestInstance({ ...config, url, method: 'POST', data: data, responseType: type });
+  return requestInstance({ ...config, url, method: 'POST', data, responseType: type })
 }
 export function put(config, url, parms) {
-  return requestInstance({ ...config, url, method: 'PUT', params: parms });
+  return requestInstance({ ...config, url, method: 'PUT', params: parms })
 }
 export function del(config, url, data) {
-  return requestInstance({ ...config, url, method: 'DELETE', data: data });
+  return requestInstance({ ...config, url, method: 'DELETE', data })
 }

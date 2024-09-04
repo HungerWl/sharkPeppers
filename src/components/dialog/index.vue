@@ -1,43 +1,45 @@
-<template>
-    <!-- 公用弹框 -->
-    <teleport to="body">
-        <div v-if="isVisible" class="modal-overlay" @click="close">
-            <div class="modal-container" :style="{ width }" @click.stop>
-                <header class="modal-header">
-                    <h3>{{ title }}</h3>
-                    <button class="close-button" @click="close">X</button>
-                </header>
-                <section class="modal-body">
-                    <slot></slot>
-                </section>
-            </div>
-        </div>
-    </teleport>
-</template>
-
 <script setup>
-import { ref } from 'vue';
+import { ref } from 'vue'
 
 const props = defineProps({
-    title: {
-        type: String,
-        required: true,
-    },
-    width: {
-        type: String,
-        default: '500px',
-    },
-});
+  title: {
+    type: String,
+    required: true,
+  },
+  width: {
+    type: String,
+    default: '500px',
+  },
+})
 
-const emit = defineEmits(['close']);
+const emit = defineEmits(['close'])
 
-const isVisible = ref(true);
+const isVisible = ref(true)
 
-const close = () => {
-    isVisible.value = false;
-    emit('close');
-};
+function close() {
+  isVisible.value = false
+  emit('close')
+}
 </script>
+
+<template>
+  <!-- 公用弹框 -->
+  <teleport to="body">
+    <div v-if="isVisible" class="modal-overlay" @click="close">
+      <div class="modal-container" :style="{ width }" @click.stop>
+        <header class="modal-header">
+          <h3>{{ title }}</h3>
+          <button class="close-button" @click="close">
+            X
+          </button>
+        </header>
+        <section class="modal-body">
+          <slot />
+        </section>
+      </div>
+    </div>
+  </teleport>
+</template>
 
 <style scoped>
 .modal-overlay {

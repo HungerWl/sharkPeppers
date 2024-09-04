@@ -14,6 +14,7 @@ import { setupStore } from './stores'
 import { setupI18n } from './i18n'
 import App from './App.vue'
 import { setupDirectives } from '@/directives'
+
 // import Banner from '@/utils/banner'
 
 // 使用 mock 模拟接口，如果确定不再使用请将这行代码和引入一并删除

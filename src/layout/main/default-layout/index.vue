@@ -1,6 +1,6 @@
 <script setup>
 import { computed, defineAsyncComponent } from 'vue'
-import { Fold, Expand } from '@element-plus/icons-vue'
+import { Expand, Fold } from '@element-plus/icons-vue'
 import LayoutMain from '../LayoutMain.vue'
 import SubMenu from './SubMenu.vue'
 import MainMenu from './MainMenu.vue'

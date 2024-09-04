@@ -25,9 +25,11 @@ function openLink(path) {
 </script>
 
 <template>
-  <el-menu :mode="mode" :default-active="active" router
+  <el-menu
+    :mode="mode" :default-active="active" router
     :collapse="!appConfig.isMainMenuShowTitle && mode === 'vertical'"
-    :collapse-transition="appConfig.enableCollapseTransition" class="fv-default-layout-main-menu">
+    :collapse-transition="appConfig.enableCollapseTransition" class="fv-default-layout-main-menu"
+  >
     <template v-for="item in routes" :key="item.path">
       <el-menu-item :index="isLink(item.path) ? '' : item.path" @click="openLink(item.path)">
         <el-icon v-if="item.meta?.icon">

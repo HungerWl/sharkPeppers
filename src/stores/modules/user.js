@@ -1,6 +1,6 @@
 import { defineStore } from 'pinia'
 import { ref, shallowRef } from 'vue'
-import { ElNotification, ElMessage } from 'element-plus'
+import { ElMessage, ElNotification } from 'element-plus'
 import { useRouteStore } from './route'
 import router from '@/router'
 import { loginApi } from '@/api/auth'
@@ -16,10 +16,10 @@ export const useUserStore = defineStore('user', () => {
   async function login(form) {
     const res = await loginApi(form)
     if (res.status === 200) {
-      let { AUTH_TOKEN, msg, result } = JSON.parse(res.data)
-      if (result !== "success") {
+      const { AUTH_TOKEN, msg, result } = JSON.parse(res.data)
+      if (result !== 'success')
         return ElMessage.error(msg)
-      }
+
       token.value = AUTH_TOKEN
       ElNotification({
         title: t('app.loginSuccess'),
@@ -38,13 +38,13 @@ export const useUserStore = defineStore('user', () => {
       const routeStore = useRouteStore()
       token.value = ''
       userInfo.value = null
-      sessionStorage.removeItem("WL_ADMIN_USER")
+      sessionStorage.removeItem('WL_ADMIN_USER')
       await router.replace(`/login?replace=${router.currentRoute.value.path}`)
       routeStore.$reset()
     }
   }
 
-  return { token, userInfo, login, logout, }
+  return { token, userInfo, login, logout }
 }, {
   persist: {
     key: `${PREFIX}USER`,

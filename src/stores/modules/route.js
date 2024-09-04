@@ -32,21 +32,20 @@ export const useRouteStore = defineStore('route', () => {
       routes = routeModuleList
     }
     else if (routeSource === 'backend') {
-      let data = await menuListApi()
+      const data = await menuListApi()
       routes = data
     }
     const { hasRole } = useAuth()
-    let routeMap = handleRoutes(routes, hasRole, innerNotFound)
+    const routeMap = handleRoutes(routes, hasRole, innerNotFound)
     // 获取homePath
     // rootRoute.redirect = getHomePath(useUserStore().userInfo)
-    rootRoute.redirect = "/home"
+    rootRoute.redirect = '/home'
     // 需要缓存的组件列表名称
     keepAliveViews.value = routeMap.keepAliveViews
     // 需要固定标签的路由
     fiexTabsRoutes.value = routeMap.fiexTabsRoutes
     // 添加路由到路由器
     rootRoute.children = [...routeMap.innerRoutes]
-
 
     router.addRoute(rootRoute)
     // 提升需要在 layout 框架外显示的路由与 root 路由平级
@@ -55,7 +54,6 @@ export const useRouteStore = defineStore('route', () => {
     })
     // 获取菜单
     menus.value = getMenus(routes, hasRole)
-
   }
 
   // 使用 setup 语法糖的 pinia 自己实现 $reset 方法

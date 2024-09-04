@@ -43,8 +43,10 @@ onUnmounted(() => {
 <template>
   <ElConfigProvider :locale="locale" :size="appStore.appConfig.elementSize">
     <RouterView v-slot="{ Component, route }">
-      <Transition v-if="appStore.appConfig.isTransition && route.meta.isOuter"
-        :name="route.meta?.transition || appStore.appConfig.transitionName" mode="out-in">
+      <Transition
+        v-if="appStore.appConfig.isTransition && route.meta.isOuter"
+        :name="route.meta?.transition || appStore.appConfig.transitionName" mode="out-in"
+      >
         <KeepAlive :include="routeStore.keepAliveViews" :exclude="state.exc">
           <Component :is="Component" v-if="state.show" :key="route.path" />
         </KeepAlive>

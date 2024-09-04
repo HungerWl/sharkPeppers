@@ -1,14 +1,8 @@
-<template>
-  <el-main class="fv-error-404">
-    <div ref="lottieContainer" class="w-full h-full"></div>
-  </el-main>
-</template>
-
 <script setup>
-import { onMounted, ref } from 'vue';
-import lottie from 'lottie-web';
+import { onMounted, ref } from 'vue'
+import lottie from 'lottie-web'
 
-const lottieContainer = ref(null);
+const lottieContainer = ref(null)
 
 onMounted(() => {
   // 加载 Lottie 动画
@@ -17,10 +11,16 @@ onMounted(() => {
     renderer: 'svg', // 渲染器类型，可以是 'svg', 'canvas' 或 'html'
     loop: true, // 是否循环播放
     autoplay: true, // 是否自动播放
-    path: new URL('@/assets/lottie/404.json', import.meta.url).href // 确保路径正确
-  });
-});
+    path: new URL('@/assets/lottie/404.json', import.meta.url).href, // 确保路径正确
+  })
+})
 </script>
+
+<template>
+  <el-main class="fv-error-404">
+    <div ref="lottieContainer" class="w-full h-full" />
+  </el-main>
+</template>
 
 <style scoped>
 .fv-error-404 {
@@ -31,5 +31,4 @@ onMounted(() => {
   position: relative;
   height: 100%;
 }
-
 </style>

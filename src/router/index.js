@@ -7,7 +7,6 @@ import { useAppStore } from '@/stores/modules/app'
 import { useUserStore } from '@/stores/modules/user'
 import { userInfoApi } from '@/api/auth'
 
-
 // 路由白名单
 export const WHITE_LIST = []
 

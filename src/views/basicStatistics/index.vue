@@ -1,15 +1,14 @@
-<template>
-    <div id='app'>
-        basicStatistics
-    </div>
-</template>
-
 <script setup>
-import { ref, onMounted } from 'vue';
-
+import { onMounted } from 'vue'
 
 onMounted(() => {
-});
+})
 </script>
+
+<template>
+  <div id="app">
+    basicStatistics
+  </div>
+</template>
 
 <style scoped></style>

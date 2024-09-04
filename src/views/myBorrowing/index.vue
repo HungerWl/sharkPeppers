@@ -1,15 +1,14 @@
-<template>
-    <div id='app'>
-        我的借阅
-    </div>
-</template>
-
 <script setup>
-import { ref, onMounted } from 'vue';
-
+import { onMounted } from 'vue'
 
 onMounted(() => {
-});
+})
 </script>
+
+<template>
+  <div id="app">
+    我的借阅
+  </div>
+</template>
 
 <style scoped></style>

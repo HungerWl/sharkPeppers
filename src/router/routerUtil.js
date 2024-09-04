@@ -5,7 +5,6 @@ import { notFound } from '@/router/base'
 const { sort, foreach, forEach, listToTree } = useCutTree({ id: 'path', children: 'children', parentId: 'parentPath' })
 const allViews = import.meta.glob('/src/views/**/*.vue')
 
-
 /**
  * 菜单排序
  * @param {*[]} menus 菜单
@@ -113,7 +112,7 @@ function handleComponent(route, hasRole) {
   }
   else if (route.component && typeof (route.component) === 'string') {
     const url = `/src/views/${route.component}/index.vue`
-    route.component = allViews[url];
+    route.component = allViews[url]
     // console.log(route.component);
   }
 }
