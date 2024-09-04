@@ -22,7 +22,7 @@ const baseRoutes = [
     name: 'Login',
     component: () => import('@/views/login/index.vue'),
   },
-  //插件路由
+  // 插件路由
   {
     path: '/attachePreview',
     name: 'AttachePreview',
