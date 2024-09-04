@@ -106,7 +106,7 @@ function attachmentPreview() {
           <el-table-column prop="date" label="文件名称" min-width="120" show-overflow-tooltip />
           <el-table-column prop="date" label="档号" min-width="120" show-overflow-tooltip />
           <el-table-column prop="date" label="题名" min-width="120" show-overflow-tooltip />
-          <el-table-column fixed="right" label="操作" width="280">
+          <el-table-column fixed="right" label="操作" width="300">
             <template #default>
               <el-button type="primary" @click="attachmentPreview">
                 附件预览
