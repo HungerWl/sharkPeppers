@@ -1,14 +1,38 @@
 <script setup>
-import { onMounted, ref } from 'vue'
-import { Picture, Search } from '@element-plus/icons-vue'
+import { ref } from 'vue'
+import { Picture, Search, Setting } from '@element-plus/icons-vue'
+import { getListAll } from '@/api/fileSearch'
 
 const tableData = ref([])
 const form = ref({
   param: '',
 })
-onMounted(() => {
+const select = ref()
+const checkList = ref([])
+const checkOpiton = ref([])
+const isIndeterminate = ref(false)
+const checkAll = ref(false)
 
-})
+async function useListAll() {
+  const res = await getListAll()
+  checkOpiton.value = res
+}
+useListAll()
+const dialogVisible = ref(false)
+function handleCheckAllChange(val) {
+  checkList.value = val ? checkOpiton.value.map(item => item) : []
+  isIndeterminate.value = false
+}
+function handleCheckedCitiesChange(value) {
+  const checkedCount = value.length
+  if (checkedCount > 0)
+    isIndeterminate.value = true
+
+  if (checkedCount === checkOpiton.value.length) {
+    checkAll.value = true
+    isIndeterminate.value = false
+  }
+}
 </script>
 
 <template>
@@ -28,8 +52,35 @@ onMounted(() => {
       <el-button type="primary" :icon="Picture">
         智能识图
       </el-button>
+      <el-button type="primary" :icon="Setting" @click="dialogVisible = true">
+        显示设置
+      </el-button>
     </el-card>
-    <el-table :data="tableData" border style="width: 100%;" height="480" />
+    <el-table :data="tableData" border style="width: 100%;" height="480">
+      <el-table-column type="index" label="序号" min-width="80" show-overflow-tooltip />
+      <el-table-column type="index" label="档号" min-width="120" show-overflow-tooltip />
+      <el-table-column type="index" label="题名" min-width="120" show-overflow-tooltip />
+      <el-table-column v-for="(i, idx) in checkList" :key="idx" :prop="i.field" :label="i.field_name" min-width="120"
+        show-overflow-tooltip />
+      <el-table-column fixed="right" label="操作" min-width="120">
+        <template #default>
+          <el-button link type="primary">
+            卷内
+          </el-button>
+          <el-button link type="primary">
+            附件
+          </el-button>
+        </template>
+      </el-table-column>
+    </el-table>
+    <el-dialog v-model="dialogVisible" title="显示设置" width="500">
+      <el-checkbox v-model="checkAll" :indeterminate="isIndeterminate" @change="handleCheckAllChange">
+        全选
+      </el-checkbox>
+      <el-checkbox-group v-model="checkList" @change="handleCheckedCitiesChange">
+        <el-checkbox v-for="(i, idx) in checkOpiton" :key="idx" :label="i.field_name" :value="i" />
+      </el-checkbox-group>
+    </el-dialog>
   </el-main>
 </template>
 
