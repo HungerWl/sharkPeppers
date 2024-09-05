@@ -3,7 +3,7 @@
 
 <head>
   <meta charset="UTF-8">
-  <link rel="icon" href="/sharkPeppers/assets/logo-D_VYMkdJ.svg">
+  <link rel="icon" href="/sharkPeppers/logo.svg">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>后台管理系统模板</title>
 
@@ -11,99 +11,118 @@
     * {
       margin: 0;
       padding: 0;
-      box-sizing: border-box;
     }
+
 
     .loading-container {
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      text-align: center;
     }
 
-    .spinner {
+    .loading-line {
       width: 60px;
-      height: 60px;
-      border: 8px solid #ccc;
-      border-top-color: #2a9d8f;
-      border-radius: 50%;
-      animation: spin 1.2s linear infinite;
-      margin-bottom: 20px;
-      box-shadow: 0 0 15px rgba(42, 157, 143, 0.5);
+      height: 4px;
+      background-color: #007bff;
+      /* 蓝色加载条 */
+      margin: 4px 0;
+      border-radius: 2px;
+      animation: loading 1s ease-in-out infinite;
+    }
+
+    .loading-line:nth-child(2) {
+      animation-delay: 0.2s;
+    }
+
+    .loading-line:nth-child(3) {
+      animation-delay: 0.4s;
     }
 
     .loading-text {
-      font-size: 1.4rem;
-      color: #333;
-      letter-spacing: 1.5px;
-      animation: fadeIn 2s ease-in-out infinite;
+      margin-top: 20px;
+      font-size: 16px;
+      color: #555;
     }
 
-    @keyframes spin {
+    @keyframes loading {
       0% {
-        transform: rotate(0deg);
-      }
-
-      100% {
-        transform: rotate(360deg);
-      }
-    }
-
-    @keyframes fadeIn {
-      0% {
-        opacity: 0;
+        transform: scaleX(1);
       }
 
       50% {
-        opacity: 1;
+        transform: scaleX(0.5);
       }
 
       100% {
-        opacity: 0;
+        transform: scaleX(1);
+      }
+    }
+
+    .loading-text {
+      margin-top: 20px;
+      font-size: 16px;
+      color: #555;
+      font-weight: bold;
+      letter-spacing: 0.1em;
+    }
+
+    .loading-text::after {
+      content: '...';
+      animation: dots 1.5s steps(4, end) infinite;
+    }
+
+    @keyframes loading {
+      0% {
+        transform: scaleX(1);
+      }
+
+      50% {
+        transform: scaleX(0.5);
+      }
+
+      100% {
+        transform: scaleX(1);
+      }
+    }
+
+    @keyframes dots {
+
+      0%,
+      20% {
+        content: '';
+      }
+
+      40% {
+        content: '.';
+      }
+
+      60% {
+        content: '..';
+      }
+
+      80%,
+      100% {
+        content: '...';
       }
     }
   </style>
-  <script type="module" crossorigin src="/sharkPeppers/assets/index-BM2tOj8T.js"></script>
-  <link rel="stylesheet" crossorigin href="/sharkPeppers/assets/index-CP17NGy_.css">
+
+  <script type="module" crossorigin src="/sharkPeppers/assets/index-C7Qv2pB2.js"></script>
+  <link rel="stylesheet" crossorigin href="/sharkPeppers/assets/index-D_F7sAlq.css">
 </head>
 
 <body>
   <div id="app">
-    <div
-      style="width: 100vw;height: 100vh;display: flex;flex-direction:column;align-items: center;justify-content: center;">
-      <div class="spinner"></div>
-      <div class="loading-text">档案系统加载中...</div>
+    <div style="width: 100vw;height: 100vh;display: flex;justify-content: center;align-items: center;">
+      <div class="loading-container">
+        <div class="loading-line"></div>
+        <div class="loading-line"></div>
+        <div class="loading-line"></div>
+        <div class="loading-text">加载中</div>
+      </div>
     </div>
-  </div>
-  <!-- <script>
-    // 定义一个函数用于加载脚本
-    function loadScript(src, callback) {
-      var script = document.createElement('script');
-      script.type = 'text/javascript';
-      script.src = src;
-
-      // 脚本加载成功
-      script.onload = function () {
-        console.log('office脚本启动成功');
-      };
-
-      // 脚本加载失败
-      script.onerror = function () {
-        console.error('office脚本启动失败');
-      };
-
-      // 将脚本添加到DOM中
-      document.head.appendChild(script);
-    }
-
-    // 使用函数加载脚本
-    window.onload = function () {
-      var docUrl = 'http://192.168.3.71:8082/'; // 假设这是你的文档URL
-      var scriptUrl = `${docUrl}web-apps/apps/api/documents/api.js`;
-      loadScript(scriptUrl);
-    };
-  </script> -->
+  </div>
 </body>
 
 </html>

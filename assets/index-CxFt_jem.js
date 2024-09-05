@@ -1,1 +1,0 @@
-import{o as a,a as o,b as t,c as n,w as s,k as r}from"./index-BM2tOj8T.js";const m={__name:"index",setup(c){return a(()=>{}),(l,_)=>{const e=o("el-main");return t(),n(e,{id:"organizeLibrary",class:"h-full w-full"},{default:s(()=>[r("整理库")]),_:1})}}};export{m as default};
