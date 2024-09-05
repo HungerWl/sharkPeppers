@@ -5,7 +5,7 @@ export default {
   component: () => import('@/views/serviceUtilization/index.vue'),
   meta: {
     title: 'menus.serviceUtilization',
-    isHide: false,
+    isHide: true,
     icon: 'icon-fuwu_o',
     fixedTab: false,
     sortNo: 6,

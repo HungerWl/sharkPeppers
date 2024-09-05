@@ -30,7 +30,7 @@ export default {
       component: () => import('@/views/templateManagement/index.vue'),
       meta: {
         title: 'menus.templateManagement',
-        isHide: false,
+        isHide: true,
         icon: 'icon-wodemoban',
         fixedTab: false,
         sortNo: 2,
@@ -56,7 +56,7 @@ export default {
       component: () => import('@/views/menuManagement/index.vue'),
       meta: {
         title: 'menus.menuManagement',
-        isHide: false,
+        isHide: true,
         icon: 'icon-caidanguanli',
         fixedTab: false,
         sortNo: 4,
@@ -69,7 +69,7 @@ export default {
       component: () => import('@/views/archiveChapterSettings/index.vue'),
       meta: {
         title: 'menus.archiveChapterSettings',
-        isHide: false,
+        isHide: true,
         icon: 'icon-guidang',
         fixedTab: false,
         sortNo: 5,
@@ -82,7 +82,7 @@ export default {
       component: () => import('@/views/roleManagement/index.vue'),
       meta: {
         title: 'menus.roleManagement',
-        isHide: false,
+        isHide: true,
         icon: 'icon-navicon-jsgl',
         fixedTab: false,
         sortNo: 6,
