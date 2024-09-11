@@ -1,17 +1,3 @@
-<script setup>
-const props = defineProps({
-  modelValue: { type: String, default: 'default' },
-})
-const emit = defineEmits(['update:modelValue'])
-
-function onLayoutTypeClick(layoutType) {
-  emit('update:modelValue', layoutType)
-}
-function isActive(layoutType) {
-  return props.modelValue === layoutType ? 'layout-is-active' : ''
-}
-</script>
-
 <template>
   <ul class="layout-select">
     <li class="layout-select-item" :class="isActive('default')" @click.stop="onLayoutTypeClick('default')">
@@ -49,6 +35,20 @@ function isActive(layoutType) {
     </li>
   </ul>
 </template>
+
+<script setup>
+const props = defineProps({
+  modelValue: { type: String, default: 'default' },
+})
+const emit = defineEmits(['update:modelValue'])
+
+function onLayoutTypeClick(layoutType) {
+  emit('update:modelValue', layoutType)
+}
+function isActive(layoutType) {
+  return props.modelValue === layoutType ? 'layout-is-active' : ''
+}
+</script>
 
 <style scoped>
 .layout-is-active {

@@ -1,3 +1,27 @@
+<template>
+  <div id="app" class="flex items-center justify-center min-h-screen bg-gray-100" :style="bgStyle">
+    <!-- lottie -->
+    <!-- <div ref="lottieContainer" class="absolute inset-0 z-0"></div> -->
+    <!-- 表单内容 -->
+    <div class="w-full max-w-sm p-8 bg-white shadow-lg rounded-lg transition-opacity duration-500 ease-in-out z-10" :class="{ 'opacity-100': isLoaded, 'opacity-0': !isLoaded }">
+      <div class="login_logo" />
+      <el-input v-model="login_form.username" placeholder="请输入账号" clearable class="mb-4 input-styled">
+        <template #prefix>
+          <i class="el-icon-user text-gray-500" />
+        </template>
+      </el-input>
+      <el-input v-model="login_form.password" type="password" clearable placeholder="请输入密码" class="mb-4 input-styled">
+        <template #prefix>
+          <i class="el-icon-lock text-gray-500" />
+        </template>
+      </el-input>
+      <el-button type="primary" class="w-full" @click="handleLogin">
+        登录系统
+      </el-button>
+    </div>
+  </div>
+</template>
+
 <script setup>
 import { computed, onMounted, reactive, ref } from 'vue'
 import { useRouter } from 'vue-router'
@@ -58,33 +82,6 @@ async function handleLogin() {
   router.replace('/home')
 }
 </script>
-
-<template>
-  <div id="app" class="flex items-center justify-center min-h-screen bg-gray-100" :style="bgStyle">
-    <!-- lottie -->
-    <!-- <div ref="lottieContainer" class="absolute inset-0 z-0"></div> -->
-    <!-- 表单内容 -->
-    <div
-      class="w-full max-w-sm p-8 bg-white shadow-lg rounded-lg transition-opacity duration-500 ease-in-out z-10"
-      :class="{ 'opacity-100': isLoaded, 'opacity-0': !isLoaded }"
-    >
-      <div class="login_logo" />
-      <el-input v-model="login_form.username" placeholder="请输入账号" clearable class="mb-4 input-styled">
-        <template #prefix>
-          <i class="el-icon-user text-gray-500" />
-        </template>
-      </el-input>
-      <el-input v-model="login_form.password" type="password" clearable placeholder="请输入密码" class="mb-4 input-styled">
-        <template #prefix>
-          <i class="el-icon-lock text-gray-500" />
-        </template>
-      </el-input>
-      <el-button type="primary" class="w-full" @click="handleLogin">
-        登录系统
-      </el-button>
-    </div>
-  </div>
-</template>
 
 <style scoped>
 .input-styled {

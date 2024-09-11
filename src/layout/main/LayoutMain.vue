@@ -1,3 +1,18 @@
+<template>
+  <article>
+    <RouterView v-slot="{ Component, route }">
+      <Transition v-if="appStore.appConfig.isTransition" :name="route.meta?.transition || appStore.appConfig.transitionName" mode="out-in">
+        <KeepAlive :include="routeStore.keepAliveViews" :exclude="state.exc">
+          <Component :is="Component" v-if="state.show" :key="route.path" />
+        </KeepAlive>
+      </Transition>
+      <KeepAlive v-else :include="routeStore.keepAliveViews" :exclude="state.exc">
+        <Component :is="Component" v-if="state.show" />
+      </KeepAlive>
+    </RouterView>
+  </article>
+</template>
+
 <script setup>
 import { RouterView, useRoute } from 'vue-router'
 import { nextTick, onMounted, onUnmounted, reactive } from 'vue'
@@ -37,18 +52,3 @@ onUnmounted(() => {
   mittBus.off('onReloadPage')
 })
 </script>
-
-<template>
-  <article>
-    <RouterView v-slot="{ Component, route }">
-      <Transition v-if="appStore.appConfig.isTransition" :name="route.meta?.transition || appStore.appConfig.transitionName" mode="out-in">
-        <KeepAlive :include="routeStore.keepAliveViews" :exclude="state.exc">
-          <Component :is="Component" v-if="state.show" :key="route.path" />
-        </KeepAlive>
-      </Transition>
-      <KeepAlive v-else :include="routeStore.keepAliveViews" :exclude="state.exc">
-        <Component :is="Component" v-if="state.show" />
-      </KeepAlive>
-    </RouterView>
-  </article>
-</template>

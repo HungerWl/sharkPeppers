@@ -1,22 +1,3 @@
-<script setup>
-import { computed } from 'vue'
-import SvgIcon from '@/components/svg-icon/index.vue'
-import { useAppStore } from '@/stores/modules/app'
-import i18n from '@/i18n'
-import { defaultLanguages } from '@/appConfig'
-
-defineProps({
-  size: { type: String || Number },
-})
-const appStore = useAppStore()
-
-function command(flag) {
-  i18n.global.locale = flag
-  appStore.appConfig.defaultLanguage = flag
-}
-const locale = computed(() => appStore.appConfig.defaultLanguage)
-</script>
-
 <template>
   <div class="tools-item">
     <el-dropdown class="h-full" size="default" :trigger="appStore.appConfig.trigger" @command="command">
@@ -35,6 +16,25 @@ const locale = computed(() => appStore.appConfig.defaultLanguage)
     </el-dropdown>
   </div>
 </template>
+
+<script setup>
+import { computed } from 'vue'
+import SvgIcon from '@/components/svg-icon/index.vue'
+import { useAppStore } from '@/stores/modules/app'
+import i18n from '@/i18n'
+import { defaultLanguages } from '@/appConfig'
+
+defineProps({
+  size: { type: String || Number },
+})
+const appStore = useAppStore()
+
+function command(flag) {
+  i18n.global.locale = flag
+  appStore.appConfig.defaultLanguage = flag
+}
+const locale = computed(() => appStore.appConfig.defaultLanguage)
+</script>
 
 <style scoped>
 .el-dropdown{

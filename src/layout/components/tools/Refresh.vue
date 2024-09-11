@@ -1,16 +1,3 @@
-<script setup>
-import { computed } from 'vue'
-import mittBus from '@/utils/mitt'
-import { t } from '@/i18n'
-import SvgIcon from '@/components/svg-icon/index.vue'
-
-defineProps({
-  size: { type: String || Number },
-})
-
-const title = computed(() => t('tools.refresh'))
-</script>
-
 <template>
   <el-tooltip
     :content="title"
@@ -23,6 +10,19 @@ const title = computed(() => t('tools.refresh'))
     </div>
   </el-tooltip>
 </template>
+
+<script setup>
+import { computed } from 'vue'
+import mittBus from '@/utils/mitt'
+import { t } from '@/i18n'
+import SvgIcon from '@/components/svg-icon/index.vue'
+
+defineProps({
+  size: { type: String || Number },
+})
+
+const title = computed(() => t('tools.refresh'))
+</script>
 
 <style scoped>
 .tools-item{

@@ -1,7 +1,3 @@
-<script setup>
-const title = import.meta.env.VITE_APP_TITLE
-</script>
-
 <template>
   <div class="flex items-center pl-5 pr-5 h-full wl-logo">
     <img src="/logo.svg" class="h-[50%] mr-3">
@@ -10,6 +6,10 @@ const title = import.meta.env.VITE_APP_TITLE
     </h1>
   </div>
 </template>
+
+<script setup>
+const title = import.meta.env.VITE_APP_TITLE
+</script>
 
 <style scoped>
 .wl-logo {

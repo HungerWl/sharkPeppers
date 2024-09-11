@@ -1,27 +1,3 @@
-<script setup>
-import SvgIcon from '@/components/svg-icon/index.vue'
-
-const props = defineProps({
-  routes: {
-    type: Array,
-    require: true,
-  },
-})
-
-/** 判断路由是否为外链 */
-function isLink(path) {
-  return (path.startsWith('http:') || path.startsWith('https:'))
-}
-
-/** 打开外链地址 */
-function openLink(path) {
-  if (!isLink(path))
-    return
-  const arr = path.split(',')
-  window.open(arr[0], arr[1])
-}
-</script>
-
 <template>
   <template v-for="route in props.routes" :key="route.path">
     <el-sub-menu v-if="route.children" :index="route.path">
@@ -47,6 +23,30 @@ function openLink(path) {
     </el-menu-item>
   </template>
 </template>
+
+<script setup>
+import SvgIcon from '@/components/svg-icon/index.vue'
+
+const props = defineProps({
+  routes: {
+    type: Array,
+    require: true,
+  },
+})
+
+/** 判断路由是否为外链 */
+function isLink(path) {
+  return (path.startsWith('http:') || path.startsWith('https:'))
+}
+
+/** 打开外链地址 */
+function openLink(path) {
+  if (!isLink(path))
+    return
+  const arr = path.split(',')
+  window.open(arr[0], arr[1])
+}
+</script>
 
 <style scoped>
 .el-icon {

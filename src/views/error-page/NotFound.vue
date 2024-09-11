@@ -1,3 +1,9 @@
+<template>
+  <el-main class="fv-error-404">
+    <div ref="lottieContainer" class="w-full h-full" />
+  </el-main>
+</template>
+
 <script setup>
 import { onMounted, ref } from 'vue'
 import lottie from 'lottie-web'
@@ -15,12 +21,6 @@ onMounted(() => {
   })
 })
 </script>
-
-<template>
-  <el-main class="fv-error-404">
-    <div ref="lottieContainer" class="w-full h-full" />
-  </el-main>
-</template>
 
 <style scoped>
 .fv-error-404 {

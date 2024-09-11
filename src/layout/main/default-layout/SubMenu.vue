@@ -1,19 +1,3 @@
-<script setup>
-import { computed } from 'vue'
-import MenuItem from '@/layout/components/MenuItem.vue'
-import router from '@/router'
-import { useAppStore } from '@/stores/modules/app'
-
-defineProps({
-  mode: { type: String, default: 'vertical' },
-  routes: { type: Array, default: () => [] },
-})
-const appStore = useAppStore()
-const { currentRoute } = router
-
-const isCollapse = computed(() => appStore.appConfig.menuIsCollapse)
-</script>
-
 <template>
   <el-menu
     :menu-trigger="appStore.appConfig.trigger"
@@ -29,6 +13,22 @@ const isCollapse = computed(() => appStore.appConfig.menuIsCollapse)
     <MenuItem :routes="routes" />
   </el-menu>
 </template>
+
+<script setup>
+import { computed } from 'vue'
+import MenuItem from '@/layout/components/MenuItem.vue'
+import router from '@/router'
+import { useAppStore } from '@/stores/modules/app'
+
+defineProps({
+  mode: { type: String, default: 'vertical' },
+  routes: { type: Array, default: () => [] },
+})
+const appStore = useAppStore()
+const { currentRoute } = router
+
+const isCollapse = computed(() => appStore.appConfig.menuIsCollapse)
+</script>
 
 <style>
 .fv-default-layout-sub-menu.el-menu--horizontal > .el-sub-menu .el-sub-menu__title:hover{

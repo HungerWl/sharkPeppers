@@ -1,3 +1,18 @@
+<template>
+  <ul class="fv-theme-switch">
+    <li
+      v-for="item in themeList" :key="item.name"
+      :title="item.title" class="fv-theme-switch-item"
+      :style="`background: ${item.mainBackground};`"
+      :class="isActive(item.name)"
+      @click.stop="onThemeClick(item.name)"
+    >
+      <div class="fv-theme-switch-item-header" :style="`background: ${item.headBackground};border-bottom: ${item.borderX ? '1px' : 0} solid ${item.borderX};`" />
+      <div class="fv-theme-switch-item-sub-menu " :style="`background: ${item.asideBackground};border-right: ${item.borderY ? '1px' : 0} solid ${item.borderY};`" />
+    </li>
+  </ul>
+</template>
+
 <script setup>
 import { useAppStore } from '@/stores/modules/app'
 
@@ -61,21 +76,6 @@ const themeList = [
   },
 ]
 </script>
-
-<template>
-  <ul class="fv-theme-switch">
-    <li
-      v-for="item in themeList" :key="item.name"
-      :title="item.title" class="fv-theme-switch-item"
-      :style="`background: ${item.mainBackground};`"
-      :class="isActive(item.name)"
-      @click.stop="onThemeClick(item.name)"
-    >
-      <div class="fv-theme-switch-item-header" :style="`background: ${item.headBackground};border-bottom: ${item.borderX ? '1px' : 0} solid ${item.borderX};`" />
-      <div class="fv-theme-switch-item-sub-menu " :style="`background: ${item.asideBackground};border-right: ${item.borderY ? '1px' : 0} solid ${item.borderY};`" />
-    </li>
-  </ul>
-</template>
 
 <style scoped>
 .theme-is-active {

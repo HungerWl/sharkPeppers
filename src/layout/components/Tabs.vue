@@ -1,3 +1,137 @@
+<template>
+  <div class="fv-tabs flex justify-between">
+    <el-tabs
+      v-model="state.currTabPath" :type="appStore.appConfig.tabsType" class="flex-1 overflow-hidden"
+      @tab-remove="methods.removeTab" @tab-click="methods.tabClick"
+    >
+      <el-tab-pane v-for="item in state.tabs" :key="item.path" :name="item.path" :closable="!item.meta?.fixedTab">
+        <template #label>
+          <el-dropdown trigger="contextmenu" style="color: inherit;" @command="methods.command">
+            <div class="tabs-dropdown">
+              <el-icon v-if="showIcon && item.meta?.icon" style="width:2em;height:2em">
+                <SvgIcon :name="item.meta.icon" class="text-[20px]" />
+              </el-icon>
+              <span v-if="item.meta?.title" class="tabs-item-title text-[16px]">{{ $t(item.meta.title) }}</span>
+            </div>
+            <template #dropdown>
+              <el-dropdown-menu>
+                <el-dropdown-item :disabled="state.currTabPath !== item.path" :command="{ flag: 'refresh', tab: item }">
+                  <el-icon>
+                    <SvgIcon name="EpRefresh" />
+                  </el-icon>
+                  <span>
+                    {{ $t('tabs.refresh') }}
+                  </span>
+                </el-dropdown-item>
+
+                <el-dropdown-item :disabled="item.meta.fixedTab" :command="{ flag: 'close', tab: item }">
+                  <el-icon>
+                    <SvgIcon name="EpClose" />
+                  </el-icon>
+                  <span>
+                    {{ $t('tabs.close') }}
+                  </span>
+                </el-dropdown-item>
+                <el-dropdown-item :command="{ flag: 'close-left', tab: item }">
+                  <el-icon>
+                    <SvgIcon name="HumbleiconsAlignObjectsLeft" />
+                  </el-icon>
+                  <span>
+                    {{ $t('tabs.closeLeft') }}
+                  </span>
+                </el-dropdown-item>
+                <el-dropdown-item :command="{ flag: 'close-right', tab: item }">
+                  <el-icon>
+                    <SvgIcon name="HumbleiconsAlignObjectsRight" />
+                  </el-icon>
+                  <span>
+                    {{ $t('tabs.closeRight') }}
+                  </span>
+                </el-dropdown-item>
+                <el-dropdown-item :command="{ flag: 'close-other', tab: item }">
+                  <el-icon>
+                    <SvgIcon name="EpCircleClose" />
+                  </el-icon>
+                  <span>
+                    {{ $t('tabs.closeOther') }}
+                  </span>
+                </el-dropdown-item>
+                <el-dropdown-item :command="{ flag: 'close-all', tab: item }">
+                  <el-icon>
+                    <SvgIcon name="EpCircleCloseFilled" />
+                  </el-icon>
+                  <span>
+                    {{ $t('tabs.closeAll') }}
+                  </span>
+                </el-dropdown-item>
+              </el-dropdown-menu>
+            </template>
+          </el-dropdown>
+        </template>
+      </el-tab-pane>
+    </el-tabs>
+    <div class="fv-tabs-operation">
+      <PageLargeScreen size="18" />
+      <el-dropdown
+        :trigger="appStore.appConfig.trigger" @command="methods.command"
+        @visible-change="state.visible = $event"
+      >
+        <div class="el-dropdown-link ">
+          <el-icon size="24">
+            <Transition name="scale" mode="out-in">
+              <component :is="state.visible ? ArrowUp : ArrowDown" />
+            </Transition>
+          </el-icon>
+        </div>
+        <template #dropdown>
+          <el-dropdown-menu>
+            <el-dropdown-item :command="{ flag: 'refresh', tab: { path: state.currTabPath } }">
+              <el-icon>
+                <SvgIcon name="EpRefresh" />
+              </el-icon>
+              <span>
+                {{ $t('tabs.refresh') }}
+              </span>
+            </el-dropdown-item>
+            <el-dropdown-item :command="{ flag: 'close-left', tab: { path: state.currTabPath } }">
+              <el-icon>
+                <SvgIcon name="HumbleiconsAlignObjectsLeft" />
+              </el-icon>
+              <span>
+                {{ $t('tabs.closeLeft') }}
+              </span>
+            </el-dropdown-item>
+            <el-dropdown-item :command="{ flag: 'close-right', tab: { path: state.currTabPath } }">
+              <el-icon>
+                <SvgIcon name="HumbleiconsAlignObjectsRight" />
+              </el-icon>
+              <span>
+                {{ $t('tabs.closeRight') }}
+              </span>
+            </el-dropdown-item>
+            <el-dropdown-item :command="{ flag: 'close-other', tab: { path: state.currTabPath } }">
+              <el-icon>
+                <SvgIcon name="EpCircleClose" />
+              </el-icon>
+              <span>
+                {{ $t('tabs.closeOther') }}
+              </span>
+            </el-dropdown-item>
+            <el-dropdown-item :command="{ flag: 'close-all', tab: { path: state.currTabPath } }">
+              <el-icon>
+                <SvgIcon name="EpCircleCloseFilled" />
+              </el-icon>
+              <span>
+                {{ $t('tabs.closeAll') }}
+              </span>
+            </el-dropdown-item>
+          </el-dropdown-menu>
+        </template>
+      </el-dropdown>
+    </div>
+  </div>
+</template>
+
 <script setup>
 import { computed, defineAsyncComponent, onBeforeMount, shallowReactive } from 'vue'
 import { cloneDeep } from 'lodash'
@@ -216,140 +350,6 @@ onBeforeMount(() => {
   }))
 })
 </script>
-
-<template>
-  <div class="fv-tabs flex justify-between">
-    <el-tabs
-      v-model="state.currTabPath" :type="appStore.appConfig.tabsType" class="flex-1 overflow-hidden"
-      @tab-remove="methods.removeTab" @tab-click="methods.tabClick"
-    >
-      <el-tab-pane v-for="item in state.tabs" :key="item.path" :name="item.path" :closable="!item.meta?.fixedTab">
-        <template #label>
-          <el-dropdown trigger="contextmenu" style="color: inherit;" @command="methods.command">
-            <div class="tabs-dropdown">
-              <el-icon v-if="showIcon && item.meta?.icon" style="width:2em;height:2em">
-                <SvgIcon :name="item.meta.icon" class="text-[20px]" />
-              </el-icon>
-              <span v-if="item.meta?.title" class="tabs-item-title text-[16px]">{{ $t(item.meta.title) }}</span>
-            </div>
-            <template #dropdown>
-              <el-dropdown-menu>
-                <el-dropdown-item :disabled="state.currTabPath !== item.path" :command="{ flag: 'refresh', tab: item }">
-                  <el-icon>
-                    <SvgIcon name="EpRefresh" />
-                  </el-icon>
-                  <span>
-                    {{ $t('tabs.refresh') }}
-                  </span>
-                </el-dropdown-item>
-
-                <el-dropdown-item :disabled="item.meta.fixedTab" :command="{ flag: 'close', tab: item }">
-                  <el-icon>
-                    <SvgIcon name="EpClose" />
-                  </el-icon>
-                  <span>
-                    {{ $t('tabs.close') }}
-                  </span>
-                </el-dropdown-item>
-                <el-dropdown-item :command="{ flag: 'close-left', tab: item }">
-                  <el-icon>
-                    <SvgIcon name="HumbleiconsAlignObjectsLeft" />
-                  </el-icon>
-                  <span>
-                    {{ $t('tabs.closeLeft') }}
-                  </span>
-                </el-dropdown-item>
-                <el-dropdown-item :command="{ flag: 'close-right', tab: item }">
-                  <el-icon>
-                    <SvgIcon name="HumbleiconsAlignObjectsRight" />
-                  </el-icon>
-                  <span>
-                    {{ $t('tabs.closeRight') }}
-                  </span>
-                </el-dropdown-item>
-                <el-dropdown-item :command="{ flag: 'close-other', tab: item }">
-                  <el-icon>
-                    <SvgIcon name="EpCircleClose" />
-                  </el-icon>
-                  <span>
-                    {{ $t('tabs.closeOther') }}
-                  </span>
-                </el-dropdown-item>
-                <el-dropdown-item :command="{ flag: 'close-all', tab: item }">
-                  <el-icon>
-                    <SvgIcon name="EpCircleCloseFilled" />
-                  </el-icon>
-                  <span>
-                    {{ $t('tabs.closeAll') }}
-                  </span>
-                </el-dropdown-item>
-              </el-dropdown-menu>
-            </template>
-          </el-dropdown>
-        </template>
-      </el-tab-pane>
-    </el-tabs>
-    <div class="fv-tabs-operation">
-      <PageLargeScreen size="18" />
-      <el-dropdown
-        :trigger="appStore.appConfig.trigger" @command="methods.command"
-        @visible-change="state.visible = $event"
-      >
-        <div class="el-dropdown-link ">
-          <el-icon size="24">
-            <Transition name="scale" mode="out-in">
-              <component :is="state.visible ? ArrowUp : ArrowDown" />
-            </Transition>
-          </el-icon>
-        </div>
-        <template #dropdown>
-          <el-dropdown-menu>
-            <el-dropdown-item :command="{ flag: 'refresh', tab: { path: state.currTabPath } }">
-              <el-icon>
-                <SvgIcon name="EpRefresh" />
-              </el-icon>
-              <span>
-                {{ $t('tabs.refresh') }}
-              </span>
-            </el-dropdown-item>
-            <el-dropdown-item :command="{ flag: 'close-left', tab: { path: state.currTabPath } }">
-              <el-icon>
-                <SvgIcon name="HumbleiconsAlignObjectsLeft" />
-              </el-icon>
-              <span>
-                {{ $t('tabs.closeLeft') }}
-              </span>
-            </el-dropdown-item>
-            <el-dropdown-item :command="{ flag: 'close-right', tab: { path: state.currTabPath } }">
-              <el-icon>
-                <SvgIcon name="HumbleiconsAlignObjectsRight" />
-              </el-icon>
-              <span>
-                {{ $t('tabs.closeRight') }}
-              </span>
-            </el-dropdown-item>
-            <el-dropdown-item :command="{ flag: 'close-other', tab: { path: state.currTabPath } }">
-              <el-icon>
-                <SvgIcon name="EpCircleClose" />
-              </el-icon>
-              <span>
-                {{ $t('tabs.closeOther') }}
-              </span>
-            </el-dropdown-item>
-            <el-dropdown-item :command="{ flag: 'close-all', tab: { path: state.currTabPath } }">
-              <el-icon>
-                <SvgIcon name="EpCircleCloseFilled" />
-              </el-icon>
-              <span>
-                {{ $t('tabs.closeAll') }}
-              </span>
-            </el-dropdown-item>
-          </el-dropdown-menu>
-        </template>
-      </el-dropdown>
-    </div>
-  </div>
-</template>
 
 <style>
 .fv-tabs {

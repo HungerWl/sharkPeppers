@@ -1,3 +1,22 @@
+<template>
+  <el-menu
+    :mode="mode" :default-active="active" router
+    :collapse="!appConfig.isMainMenuShowTitle && mode === 'vertical'"
+    :collapse-transition="appConfig.enableCollapseTransition" class="fv-default-layout-main-menu"
+  >
+    <template v-for="item in routes" :key="item.path">
+      <el-menu-item :index="isLink(item.path) ? '' : item.path" @click="openLink(item.path)">
+        <el-icon v-if="item.meta?.icon">
+          <SvgIcon :name="item.meta.icon" />
+        </el-icon>
+        <template v-if="item.meta?.title" #title>
+          <span class="text-[16px]"> {{ $t(item.meta.title) }}</span>
+        </template>
+      </el-menu-item>
+    </template>
+  </el-menu>
+</template>
+
 <script setup>
 import { computed } from 'vue'
 import SvgIcon from '@/components/svg-icon/index.vue'
@@ -23,25 +42,6 @@ function openLink(path) {
   window.open(arr[0], arr[1])
 }
 </script>
-
-<template>
-  <el-menu
-    :mode="mode" :default-active="active" router
-    :collapse="!appConfig.isMainMenuShowTitle && mode === 'vertical'"
-    :collapse-transition="appConfig.enableCollapseTransition" class="fv-default-layout-main-menu"
-  >
-    <template v-for="item in routes" :key="item.path">
-      <el-menu-item :index="isLink(item.path) ? '' : item.path" @click="openLink(item.path)">
-        <el-icon v-if="item.meta?.icon">
-          <SvgIcon :name="item.meta.icon" />
-        </el-icon>
-        <template v-if="item.meta?.title" #title>
-          <span class="text-[16px]"> {{ $t(item.meta.title) }}</span>
-        </template>
-      </el-menu-item>
-    </template>
-  </el-menu>
-</template>
 
 <style scoped>
 .fv-default-layout-main-menu {

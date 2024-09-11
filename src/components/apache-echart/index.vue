@@ -1,3 +1,7 @@
+<template>
+  <div ref="chartContainer" style="width: 100%; height: 100%;" />
+</template>
+
 <script setup>
 import { onBeforeUnmount, onMounted, ref, watch } from 'vue'
 import * as echarts from 'echarts'
@@ -48,10 +52,6 @@ onBeforeUnmount(() => {
     chartInstance.dispose()
 })
 </script>
-
-<template>
-  <div ref="chartContainer" style="width: 100%; height: 100%;" />
-</template>
 
 <style scoped>
 /* 你可以根据需要调整容器的样式 */

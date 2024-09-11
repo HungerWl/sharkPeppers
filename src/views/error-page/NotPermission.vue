@@ -1,15 +1,3 @@
-<script setup>
-import { HomeFilled, RefreshLeft } from '@element-plus/icons-vue'
-import router from '@/router'
-
-function toIndex() {
-  router.push('/')
-}
-function doBack() {
-  router.back()
-}
-</script>
-
 <template>
   <el-main class="fv-error-404">
     <img src="/src/assets/images/error/notPermission.png" class="fv-error-404-img">
@@ -23,6 +11,18 @@ function doBack() {
     </div>
   </el-main>
 </template>
+
+<script setup>
+import { HomeFilled, RefreshLeft } from '@element-plus/icons-vue'
+import router from '@/router'
+
+function toIndex() {
+  router.push('/')
+}
+function doBack() {
+  router.back()
+}
+</script>
 
 <style scoped>
 .fv-error-404{

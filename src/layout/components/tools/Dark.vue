@@ -1,16 +1,3 @@
-<script setup>
-import { Moon, Sunny } from '@element-plus/icons-vue'
-import { useAppStore } from '@/stores/modules/app'
-
-defineProps({
-  size: { type: String || Number },
-})
-const { appConfig } = useAppStore()
-function onDarkClick() {
-  appConfig.theme = appConfig.theme === 'dark' ? appConfig.oldTheme : 'dark'
-}
-</script>
-
 <template>
   <el-tooltip
     :content="$t('tools.theme')"
@@ -24,6 +11,19 @@ function onDarkClick() {
     </div>
   </el-tooltip>
 </template>
+
+<script setup>
+import { Moon, Sunny } from '@element-plus/icons-vue'
+import { useAppStore } from '@/stores/modules/app'
+
+defineProps({
+  size: { type: String || Number },
+})
+const { appConfig } = useAppStore()
+function onDarkClick() {
+  appConfig.theme = appConfig.theme === 'dark' ? appConfig.oldTheme : 'dark'
+}
+</script>
 
 <style scoped>
 .tools-item{

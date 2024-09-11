@@ -1,69 +1,3 @@
-<script setup>
-import { onMounted, onUnmounted, reactive } from 'vue'
-import { useAppStore } from '@/stores/modules/app'
-import mittBus from '@/utils/mitt'
-import { getCssVal, setCssVal } from '@/utils/domUtils'
-import { tabsTypes, transitionNames } from '@/appConfig'
-import LayoutSelect from '@/layout/components/LayoutSelect.vue'
-import { t } from '@/i18n'
-import ThemeSwitch from '@/layout/components/ThemeSwitch.vue'
-
-const appStore = useAppStore()
-
-// 响应式数据定义
-const state = reactive({
-  showSettingDrawer: false, // 控制显示抽屉
-  size: 'default', // 当前组件的子组件尺寸
-  menuWidth: 0, // 侧栏菜单宽度
-  mainMenuWidth: 0, // 侧栏主菜单宽度
-  footerHeight: 0, // 页脚高度
-  headerHeight: 0, // 顶栏高度
-  tabsHeight: 0, // tabs高度
-})
-
-// 方法定义
-const methods = {
-  // 抽屉关闭时
-  drawerClose() {
-    state.showSettingDrawer = false
-  },
-  // 初始化数据
-  initState() {
-    // 获取侧栏菜单宽度
-    const menuWidth = getCssVal('--wl-sub-menu-width')
-    state.menuWidth = Number.parseInt(menuWidth.substring(0, menuWidth.lastIndexOf('px')))
-    // 获取侧栏主菜单宽度
-    const mainMenuWidth = getCssVal('--wl-main-menu-width')
-    state.mainMenuWidth = Number.parseInt(mainMenuWidth.substring(0, mainMenuWidth.lastIndexOf('px')))
-    // 获取页脚高度
-    const footerHeight = getCssVal('--wl-footer-heigth')
-    state.footerHeight = Number.parseInt(footerHeight.substring(0, footerHeight.lastIndexOf('px')))
-    // 获取顶栏高度
-    const headerHeight = getCssVal('--wl-header-height')
-    state.headerHeight = Number.parseInt(headerHeight.substring(0, headerHeight.lastIndexOf('px')))
-    // 获取tabs高度
-    const tabsHeight = getCssVal('--wl-tabs-height')
-    state.tabsHeight = Number.parseInt(tabsHeight.substring(0, tabsHeight.lastIndexOf('px')))
-  },
-  // 修改尺寸
-  updateSizeCssValue(v, cssKey) {
-    cssKey && setCssVal(cssKey, `${v}px`)
-  },
-}
-
-onMounted(() => {
-  // 初始化数据
-  methods.initState()
-  // 监听事件打开抽屉
-  mittBus.on('onShowSettingDrawer', () => {
-    state.showSettingDrawer = true
-  })
-})
-onUnmounted(() => {
-  mittBus.off('onShowSettingDrawer')
-})
-</script>
-
 <template>
   <div>
     <el-drawer
@@ -304,6 +238,72 @@ onUnmounted(() => {
     </el-drawer>
   </div>
 </template>
+
+<script setup>
+import { onMounted, onUnmounted, reactive } from 'vue'
+import { useAppStore } from '@/stores/modules/app'
+import mittBus from '@/utils/mitt'
+import { getCssVal, setCssVal } from '@/utils/domUtils'
+import { tabsTypes, transitionNames } from '@/appConfig'
+import LayoutSelect from '@/layout/components/LayoutSelect.vue'
+import { t } from '@/i18n'
+import ThemeSwitch from '@/layout/components/ThemeSwitch.vue'
+
+const appStore = useAppStore()
+
+// 响应式数据定义
+const state = reactive({
+  showSettingDrawer: false, // 控制显示抽屉
+  size: 'default', // 当前组件的子组件尺寸
+  menuWidth: 0, // 侧栏菜单宽度
+  mainMenuWidth: 0, // 侧栏主菜单宽度
+  footerHeight: 0, // 页脚高度
+  headerHeight: 0, // 顶栏高度
+  tabsHeight: 0, // tabs高度
+})
+
+// 方法定义
+const methods = {
+  // 抽屉关闭时
+  drawerClose() {
+    state.showSettingDrawer = false
+  },
+  // 初始化数据
+  initState() {
+    // 获取侧栏菜单宽度
+    const menuWidth = getCssVal('--wl-sub-menu-width')
+    state.menuWidth = Number.parseInt(menuWidth.substring(0, menuWidth.lastIndexOf('px')))
+    // 获取侧栏主菜单宽度
+    const mainMenuWidth = getCssVal('--wl-main-menu-width')
+    state.mainMenuWidth = Number.parseInt(mainMenuWidth.substring(0, mainMenuWidth.lastIndexOf('px')))
+    // 获取页脚高度
+    const footerHeight = getCssVal('--wl-footer-heigth')
+    state.footerHeight = Number.parseInt(footerHeight.substring(0, footerHeight.lastIndexOf('px')))
+    // 获取顶栏高度
+    const headerHeight = getCssVal('--wl-header-height')
+    state.headerHeight = Number.parseInt(headerHeight.substring(0, headerHeight.lastIndexOf('px')))
+    // 获取tabs高度
+    const tabsHeight = getCssVal('--wl-tabs-height')
+    state.tabsHeight = Number.parseInt(tabsHeight.substring(0, tabsHeight.lastIndexOf('px')))
+  },
+  // 修改尺寸
+  updateSizeCssValue(v, cssKey) {
+    cssKey && setCssVal(cssKey, `${v}px`)
+  },
+}
+
+onMounted(() => {
+  // 初始化数据
+  methods.initState()
+  // 监听事件打开抽屉
+  mittBus.on('onShowSettingDrawer', () => {
+    state.showSettingDrawer = true
+  })
+})
+onUnmounted(() => {
+  mittBus.off('onShowSettingDrawer')
+})
+</script>
 
 <style lang="scss">
 .setting-drawer {

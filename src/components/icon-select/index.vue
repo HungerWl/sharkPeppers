@@ -1,3 +1,53 @@
+<template>
+  <div class="icon-select-container relative" :style="{ width }">
+    <el-input
+      v-if="type === 'input'"
+      ref="selectRef"
+      v-model="selectValue"
+      v-click-outside="clickOutside"
+      placeholder="点击选择图标"
+      :readonly="false"
+      clearable
+    >
+      <template #prepend>
+        <SvgIcon :name="selectValue" />
+      </template>
+    </el-input>
+    <el-button v-else ref="selectRef" v-click-outside="clickOutside" :style="{ width }">
+      <SvgIcon :name="selectValue" />
+      <span class="ml-[4px]">{{ selectValue ? '点击更换图标' : '点击选择图标' }}</span>
+    </el-button>
+    <el-popover
+      ref="popoverRef"
+      :hide-after="0"
+      shadow="none"
+      :virtual-ref="selectRef"
+      virtual-triggering
+      :placement="placement"
+      trigger="click"
+      :teleported="false"
+      :width="popoverWidth || width"
+    >
+      <el-input v-if="type === 'button'" v-model="searchValue" placeholder="输入名称搜索图标" />
+      <el-divider v-if="type === 'button'" border-style="dashed" />
+      <el-scrollbar :height="scrollbarHeight">
+        <ul class="icon-list m-0 pl-[10px]">
+          <template v-for="icon in filterIcons" :key="icon">
+            <el-tooltip effect="dark" :content="icon" placement="top">
+              <li
+                class="icon-item p-[5px] mr-[10px] mb-[10px] w-[30px] cursor-pointer"
+                @click="selectIcon(icon)"
+              >
+                <SvgIcon :name="icon" />
+              </li>
+            </el-tooltip>
+          </template>
+        </ul>
+      </el-scrollbar>
+    </el-popover>
+  </div>
+</template>
+
 <script setup>
 import { ClickOutside as vClickOutside } from 'element-plus'
 import { computed, ref, unref } from 'vue'
@@ -52,56 +102,6 @@ function selectIcon(icon) {
   searchValue.value = ''
 }
 </script>
-
-<template>
-  <div class="icon-select-container relative" :style="{ width }">
-    <el-input
-      v-if="type === 'input'"
-      ref="selectRef"
-      v-model="selectValue"
-      v-click-outside="clickOutside"
-      placeholder="点击选择图标"
-      :readonly="false"
-      clearable
-    >
-      <template #prepend>
-        <SvgIcon :name="selectValue" />
-      </template>
-    </el-input>
-    <el-button v-else ref="selectRef" v-click-outside="clickOutside" :style="{ width }">
-      <SvgIcon :name="selectValue" />
-      <span class="ml-[4px]">{{ selectValue ? '点击更换图标' : '点击选择图标' }}</span>
-    </el-button>
-    <el-popover
-      ref="popoverRef"
-      :hide-after="0"
-      shadow="none"
-      :virtual-ref="selectRef"
-      virtual-triggering
-      :placement="placement"
-      trigger="click"
-      :teleported="false"
-      :width="popoverWidth || width"
-    >
-      <el-input v-if="type === 'button'" v-model="searchValue" placeholder="输入名称搜索图标" />
-      <el-divider v-if="type === 'button'" border-style="dashed" />
-      <el-scrollbar :height="scrollbarHeight">
-        <ul class="icon-list m-0 pl-[10px]">
-          <template v-for="icon in filterIcons" :key="icon">
-            <el-tooltip effect="dark" :content="icon" placement="top">
-              <li
-                class="icon-item p-[5px] mr-[10px] mb-[10px] w-[30px] cursor-pointer"
-                @click="selectIcon(icon)"
-              >
-                <SvgIcon :name="icon" />
-              </li>
-            </el-tooltip>
-          </template>
-        </ul>
-      </el-scrollbar>
-    </el-popover>
-  </div>
-</template>
 
 <style lang="scss" scoped>
 .icon-list {

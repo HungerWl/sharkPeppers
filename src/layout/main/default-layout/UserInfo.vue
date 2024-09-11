@@ -1,26 +1,3 @@
-<script setup>
-import { ref } from 'vue'
-import { ArrowDownBold, ArrowUpBold, SwitchButton, User } from '@element-plus/icons-vue'
-import { useAppStore } from '@/stores/modules/app'
-import { useUserStore } from '@/stores/modules/user'
-import router from '@/router'
-
-const userStore = useUserStore()
-
-const { appConfig } = useAppStore()
-const visible = ref(false)
-
-// 下拉菜单指令
-function command(flag) {
-  // 退出登录
-  if (flag === 'logout')
-    userStore.logout()
-  else if (flag === 'userinfo')
-    // 个人中心
-    router.push('/home')
-}
-</script>
-
 <template>
   <div class="pl-5 pr-5 flex items-center">
     <el-dropdown :trigger="appConfig.trigger" @visible-change="visible = $event" @command="command">
@@ -54,6 +31,29 @@ function command(flag) {
     </el-dropdown>
   </div>
 </template>
+
+<script setup>
+import { ref } from 'vue'
+import { ArrowDownBold, ArrowUpBold, SwitchButton, User } from '@element-plus/icons-vue'
+import { useAppStore } from '@/stores/modules/app'
+import { useUserStore } from '@/stores/modules/user'
+import router from '@/router'
+
+const userStore = useUserStore()
+
+const { appConfig } = useAppStore()
+const visible = ref(false)
+
+// 下拉菜单指令
+function command(flag) {
+  // 退出登录
+  if (flag === 'logout')
+    userStore.logout()
+  else if (flag === 'userinfo')
+    // 个人中心
+    router.push('/home')
+}
+</script>
 
 <style scoped>
 .el-dropdown {

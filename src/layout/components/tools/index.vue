@@ -1,3 +1,24 @@
+<template>
+  <div class="h-full flex items-center">
+    <div ref="moreRef" class="h-full flex items-center tools justify-end" :style="{ maxWidth: toolsMaxWidth }" @mouseleave="onMouseover(false)">
+      <NavSearch :size="size" />
+      <Locale :size="size" />
+      <Dark :size="size" />
+      <FullScreen :size="size" />
+      <ElSize :size="size" />
+      <div v-if="appConfig.headerToolsOmit" class="tools-item" title="展开" @click.stop="onMore" @mouseenter="onMouseover(true)">
+        <el-icon>
+          <Transition mode="out-in" name="scale">
+            <Component :is="icon" />
+          </Transition>
+        </el-icon>
+      </div>
+    </div>
+    <Settings v-if="isDev" :size="size" />
+    <Refresh :size="size" />
+  </div>
+</template>
+
 <script setup>
 import { computed, defineAsyncComponent, ref } from 'vue'
 import { ArrowLeft, ArrowRight } from '@element-plus/icons-vue'
@@ -46,27 +67,6 @@ const toolsMaxWidth = computed(() => {
   }
 })
 </script>
-
-<template>
-  <div class="h-full flex items-center">
-    <div ref="moreRef" class="h-full flex items-center tools justify-end" :style="{ maxWidth: toolsMaxWidth }" @mouseleave="onMouseover(false)">
-      <NavSearch :size="size" />
-      <Locale :size="size" />
-      <Dark :size="size" />
-      <FullScreen :size="size" />
-      <ElSize :size="size" />
-      <div v-if="appConfig.headerToolsOmit" class="tools-item" title="展开" @click.stop="onMore" @mouseenter="onMouseover(true)">
-        <el-icon>
-          <Transition mode="out-in" name="scale">
-            <Component :is="icon" />
-          </Transition>
-        </el-icon>
-      </div>
-    </div>
-    <Settings v-if="isDev" :size="size" />
-    <Refresh :size="size" />
-  </div>
-</template>
 
 <style scoped>
 .tools{

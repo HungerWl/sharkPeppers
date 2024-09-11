@@ -1,20 +1,3 @@
-<script setup>
-import { computed } from 'vue'
-import SvgIcon from '@/components/svg-icon/index.vue'
-import { useAppStore } from '@/stores/modules/app'
-import { elementSizes } from '@/appConfig'
-
-defineProps({
-  size: { type: String || Number },
-})
-const appStore = useAppStore()
-
-function command(flag) {
-  appStore.appConfig.elementSize = flag
-}
-const elSize = computed(() => appStore.appConfig.elementSize)
-</script>
-
 <template>
   <div class="tools-item">
     <el-dropdown class="h-full" size="default" :trigger="appStore.appConfig.trigger" @command="command">
@@ -33,6 +16,23 @@ const elSize = computed(() => appStore.appConfig.elementSize)
     </el-dropdown>
   </div>
 </template>
+
+<script setup>
+import { computed } from 'vue'
+import SvgIcon from '@/components/svg-icon/index.vue'
+import { useAppStore } from '@/stores/modules/app'
+import { elementSizes } from '@/appConfig'
+
+defineProps({
+  size: { type: String || Number },
+})
+const appStore = useAppStore()
+
+function command(flag) {
+  appStore.appConfig.elementSize = flag
+}
+const elSize = computed(() => appStore.appConfig.elementSize)
+</script>
 
 <style scoped>
 .el-dropdown{

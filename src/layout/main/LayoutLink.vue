@@ -1,3 +1,7 @@
+<template>
+  <div>连接已打开</div>
+</template>
+
 <script setup>
 import { watch } from 'vue'
 import { useRoute } from 'vue-router'
@@ -14,7 +18,3 @@ watch(() => route.path, () => {
   openLink(route)
 }, { immediate: true })
 </script>
-
-<template>
-  <div>连接已打开</div>
-</template>

@@ -1,3 +1,38 @@
+<template>
+  <el-tooltip :content="$t('tools.navSearch')" placement="bottom">
+    <div class="tools-item" @click.stop="onShowClick">
+      <el-icon :size="size">
+        <Search />
+      </el-icon>
+    </div>
+  </el-tooltip>
+  <el-dialog v-model="dialogVisible" title="模糊查询" width="50%" append-to-body @keydown="onKeydown">
+    <div class="flex flex-col items-center">
+      <div class="group">
+        <el-icon class=" icon">
+          <Search />
+        </el-icon>
+        <input ref="searchInputRef" v-model="keyword" class="input" placeholder="名称、路径">
+      </div>
+      <ul id="result_list" class="result_list">
+        <li v-if="!searchOptions.length" class="empty">
+          <el-empty description="description" />
+        </li>
+        <li
+          v-for="item in searchOptions" v-else :key="item.item.path" class="result_list_item"
+          :class="item.item.path === currentActivate ? 'activate' : ''" :title="item.item.path"
+          @click="onActive(item.item.path)"
+        >
+          <h3 v-html="getHTML(item.item.title)" />
+        </li>
+      </ul>
+    </div>
+    <template #footer>
+      Enter 选择 ↑ ↓ 切换  Esc 退出
+    </template>
+  </el-dialog>
+</template>
+
 <script setup>
 import { computed, nextTick, onMounted, ref, watch } from 'vue'
 import Fuse from 'fuse.js'
@@ -158,41 +193,6 @@ const getHTML = computed(() => {
   }
 })
 </script>
-
-<template>
-  <el-tooltip :content="$t('tools.navSearch')" placement="bottom">
-    <div class="tools-item" @click.stop="onShowClick">
-      <el-icon :size="size">
-        <Search />
-      </el-icon>
-    </div>
-  </el-tooltip>
-  <el-dialog v-model="dialogVisible" title="模糊查询" width="50%" append-to-body @keydown="onKeydown">
-    <div class="flex flex-col items-center">
-      <div class="group">
-        <el-icon class=" icon">
-          <Search />
-        </el-icon>
-        <input ref="searchInputRef" v-model="keyword" class="input" placeholder="名称、路径">
-      </div>
-      <ul id="result_list" class="result_list">
-        <li v-if="!searchOptions.length" class="empty">
-          <el-empty description="description" />
-        </li>
-        <li
-          v-for="item in searchOptions" v-else :key="item.item.path" class="result_list_item"
-          :class="item.item.path === currentActivate ? 'activate' : ''" :title="item.item.path"
-          @click="onActive(item.item.path)"
-        >
-          <h3 v-html="getHTML(item.item.title)" />
-        </li>
-      </ul>
-    </div>
-    <template #footer>
-      Enter 选择 ↑ ↓ 切换  Esc 退出
-    </template>
-  </el-dialog>
-</template>
 
 <style lang="scss" scoped>
 .result_list {

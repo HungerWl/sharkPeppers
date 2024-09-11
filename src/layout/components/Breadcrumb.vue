@@ -1,10 +1,3 @@
-<script setup>
-import { useRoute } from 'vue-router'
-import SvgIcon from '@/components/svg-icon/index.vue'
-
-const route = useRoute()
-</script>
-
 <template>
   <el-breadcrumb separator="/">
     <el-breadcrumb-item v-for="item in route.matched" :key="item.path" :to="{ path: item.path }">
@@ -19,6 +12,13 @@ const route = useRoute()
     </el-breadcrumb-item>
   </el-breadcrumb>
 </template>
+
+<script setup>
+import { useRoute } from 'vue-router'
+import SvgIcon from '@/components/svg-icon/index.vue'
+
+const route = useRoute()
+</script>
 
 <style scoped>
 :deep(.el-breadcrumb__item:last-child) .el-breadcrumb__inner {

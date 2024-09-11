@@ -1,32 +1,3 @@
-<script setup>
-import { computed, defineAsyncComponent } from 'vue'
-import { Expand, Fold } from '@element-plus/icons-vue'
-import LayoutMain from '../LayoutMain.vue'
-import SubMenu from './SubMenu.vue'
-import MainMenu from './MainMenu.vue'
-import { useAppStore } from '@/stores/modules/app'
-import Tabs from '@/layout/components/Tabs.vue'
-import useMenu from '@/hooks/useMenu'
-import { useRouteStore } from '@/stores/modules/route'
-
-defineOptions({ name: 'DefaultLayout' })
-useMenu()
-const routeStore = useRouteStore()
-const Tools = defineAsyncComponent(() => import('../../components/tools/index.vue'))
-const Backtop = defineAsyncComponent(() => import('./Backtop.vue'))
-const Breadcrumb = defineAsyncComponent(() => import('@/layout/components/Breadcrumb.vue'))
-const Logo = defineAsyncComponent(() => import('./Logo.vue'))
-const UserInfo = defineAsyncComponent(() => import('./UserInfo.vue'))
-
-const { appConfig } = useAppStore()
-
-const layoutFixed = computed(() => appConfig.layoutFixed ? 'overflow-auto' : '')
-const collapseIcon = computed(() => appConfig.menuIsCollapse ? Expand : Fold)
-const isCrosswise = computed(() => appConfig.layoutType === 'crosswise')
-const isMixture = computed(() => appConfig.layoutType === 'mixture')
-const isDoubleAside = computed(() => appConfig.layoutType === 'doubleAside')
-</script>
-
 <template>
   <article v-show="!appConfig.pageLargeScreen" class="fv-default-layout">
     <header class="fv-default-layout-header">
@@ -72,6 +43,35 @@ const isDoubleAside = computed(() => appConfig.layoutType === 'doubleAside')
   </article>
   <Backtop :target="appConfig.layoutFixed ? '.fv-layout-main' : '.fv-default-layout'" />
 </template>
+
+<script setup>
+import { computed, defineAsyncComponent } from 'vue'
+import { Expand, Fold } from '@element-plus/icons-vue'
+import LayoutMain from '../LayoutMain.vue'
+import SubMenu from './SubMenu.vue'
+import MainMenu from './MainMenu.vue'
+import { useAppStore } from '@/stores/modules/app'
+import Tabs from '@/layout/components/Tabs.vue'
+import useMenu from '@/hooks/useMenu'
+import { useRouteStore } from '@/stores/modules/route'
+
+defineOptions({ name: 'DefaultLayout' })
+useMenu()
+const routeStore = useRouteStore()
+const Tools = defineAsyncComponent(() => import('../../components/tools/index.vue'))
+const Backtop = defineAsyncComponent(() => import('./Backtop.vue'))
+const Breadcrumb = defineAsyncComponent(() => import('@/layout/components/Breadcrumb.vue'))
+const Logo = defineAsyncComponent(() => import('./Logo.vue'))
+const UserInfo = defineAsyncComponent(() => import('./UserInfo.vue'))
+
+const { appConfig } = useAppStore()
+
+const layoutFixed = computed(() => appConfig.layoutFixed ? 'overflow-auto' : '')
+const collapseIcon = computed(() => appConfig.menuIsCollapse ? Expand : Fold)
+const isCrosswise = computed(() => appConfig.layoutType === 'crosswise')
+const isMixture = computed(() => appConfig.layoutType === 'mixture')
+const isDoubleAside = computed(() => appConfig.layoutType === 'doubleAside')
+</script>
 
 <style scoped>
 .fv-menu-fold{

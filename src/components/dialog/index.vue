@@ -1,3 +1,22 @@
+<template>
+  <!-- 公用弹框 -->
+  <teleport to="body">
+    <div v-if="isVisible" class="modal-overlay" @click="close">
+      <div class="modal-container" :style="{ width }" @click.stop>
+        <header class="modal-header">
+          <h3>{{ title }}</h3>
+          <button class="close-button" @click="close">
+            X
+          </button>
+        </header>
+        <section class="modal-body">
+          <slot />
+        </section>
+      </div>
+    </div>
+  </teleport>
+</template>
+
 <script setup>
 import { ref } from 'vue'
 
@@ -21,25 +40,6 @@ function close() {
   emit('close')
 }
 </script>
-
-<template>
-  <!-- 公用弹框 -->
-  <teleport to="body">
-    <div v-if="isVisible" class="modal-overlay" @click="close">
-      <div class="modal-container" :style="{ width }" @click.stop>
-        <header class="modal-header">
-          <h3>{{ title }}</h3>
-          <button class="close-button" @click="close">
-            X
-          </button>
-        </header>
-        <section class="modal-body">
-          <slot />
-        </section>
-      </div>
-    </div>
-  </teleport>
-</template>
 
 <style scoped>
 .modal-overlay {

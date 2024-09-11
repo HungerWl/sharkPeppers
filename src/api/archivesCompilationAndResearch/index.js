@@ -1,10 +1,13 @@
 import { ElMessage } from 'element-plus'
 import { get, post } from '@/utils/axios'
 
-// 通知公告
-export async function getNotice(data) {
+/**
+ * 获取 BSC 模块树列表
+ * @param {} - 空对象
+ */
+export async function getModuleTreeList(data) {
   try {
-    const response = await get({}, '/fhsms/getNoticeList', data)
+    const response = await post({}, 'bsc/moduleTreeList', data)
     if (response.status !== 200)
       ElMessage.error(response.message)
     return response.data
@@ -14,10 +17,10 @@ export async function getNotice(data) {
   }
 }
 
-// 文件共享
-export async function getShartFile(data) {
+// 电子文件
+export async function getFilesTable(data) {
   try {
-    const response = await get({}, '/share/getShareList', data)
+    const response = await post({}, 'bscDirFile/list', data)
     if (response.status !== 200)
       ElMessage.error(response.message)
     return response.data
@@ -27,13 +30,11 @@ export async function getShartFile(data) {
   }
 }
 
-// 统计中心
-export async function getStatisticalCenter(data) {
+// 获取文件流
+export async function getFile(data, type) {
   try {
-    const response = await post({}, '/statisticsTemplate/executeStatistics', data)
-    if (response.status !== 200)
-      ElMessage.error(response.message)
-    return response.data
+    const response = await get({}, 'bsc/getFile', data, type)
+    return response
   }
   catch (error) {
     ElMessage.error(error.message)

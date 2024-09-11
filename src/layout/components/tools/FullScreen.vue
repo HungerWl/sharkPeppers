@@ -1,3 +1,16 @@
+<template>
+  <el-tooltip
+    :content="title"
+    placement="bottom"
+  >
+    <div class="tools-item" @click="clickSetting">
+      <el-icon :size="size">
+        <SvgIcon :name="isFullscreen ? 'AntDesignFullscreenExitOutlined' : 'AntDesignFullscreenOutlined'" />
+      </el-icon>
+    </div>
+  </el-tooltip>
+</template>
+
 <script setup>
 import screenfull from 'screenfull'
 import { computed, ref } from 'vue'
@@ -19,19 +32,6 @@ if (screenfull.isEnabled) {
   })
 }
 </script>
-
-<template>
-  <el-tooltip
-    :content="title"
-    placement="bottom"
-  >
-    <div class="tools-item" @click="clickSetting">
-      <el-icon :size="size">
-        <SvgIcon :name="isFullscreen ? 'AntDesignFullscreenExitOutlined' : 'AntDesignFullscreenOutlined'" />
-      </el-icon>
-    </div>
-  </el-tooltip>
-</template>
 
 <style scoped>
 .tools-item{

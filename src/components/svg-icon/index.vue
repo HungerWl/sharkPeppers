@@ -1,3 +1,10 @@
+<template>
+  <Icon v-if="name.includes(':')" class="svg-icon" :icon="name" />
+  <svg v-else class="svg-icon">
+    <use :xlink:href="symbolId" />
+  </svg>
+</template>
+
 <script setup>
 import { Icon } from '@iconify/vue'
 import { computed } from 'vue'
@@ -16,13 +23,6 @@ const props = defineProps({
 })
 const symbolId = computed(() => `#${props.perfix}-${props.name}`)
 </script>
-
-<template>
-  <Icon v-if="name.includes(':')" class="svg-icon" :icon="name" />
-  <svg v-else class="svg-icon">
-    <use :xlink:href="symbolId" />
-  </svg>
-</template>
 
 <style scoped lang="scss">
 :deep(.svg-icon) {

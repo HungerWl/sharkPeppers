@@ -3,7 +3,7 @@ import * as echarts from 'echarts'
 export function getBarChartOptions(chartInfo, data) {
   return {
     title: {
-      text: chartInfo.resName,
+      text: chartInfo.name || chartInfo.resName,
       left: 'center',
       textStyle: {
         fontSize: 16,

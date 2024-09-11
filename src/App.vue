@@ -1,3 +1,23 @@
+<template>
+  <ElConfigProvider :locale="locale" :size="appStore.appConfig.elementSize">
+    <RouterView v-slot="{ Component, route }">
+      <Transition
+        v-if="appStore.appConfig.isTransition && route.meta.isOuter"
+        :name="route.meta?.transition || appStore.appConfig.transitionName" mode="out-in"
+      >
+        <KeepAlive :include="routeStore.keepAliveViews" :exclude="state.exc">
+          <Component :is="Component" v-if="state.show" :key="route.path" />
+        </KeepAlive>
+      </Transition>
+      <KeepAlive v-else-if="route.meta.isOuter" :include="routeStore.keepAliveViews" :exclude="state.exc">
+        <Component :is="Component" v-if="state.show" />
+      </KeepAlive>
+      <Component :is="Component" v-else />
+    </RouterView>
+    <SettingDrawer />
+  </ElConfigProvider>
+</template>
+
 <script setup>
 import { RouterView, useRoute } from 'vue-router'
 import { nextTick, onMounted, onUnmounted, reactive } from 'vue'
@@ -39,23 +59,3 @@ onUnmounted(() => {
   mittBus.off('onReloadPage')
 })
 </script>
-
-<template>
-  <ElConfigProvider :locale="locale" :size="appStore.appConfig.elementSize">
-    <RouterView v-slot="{ Component, route }">
-      <Transition
-        v-if="appStore.appConfig.isTransition && route.meta.isOuter"
-        :name="route.meta?.transition || appStore.appConfig.transitionName" mode="out-in"
-      >
-        <KeepAlive :include="routeStore.keepAliveViews" :exclude="state.exc">
-          <Component :is="Component" v-if="state.show" :key="route.path" />
-        </KeepAlive>
-      </Transition>
-      <KeepAlive v-else-if="route.meta.isOuter" :include="routeStore.keepAliveViews" :exclude="state.exc">
-        <Component :is="Component" v-if="state.show" />
-      </KeepAlive>
-      <Component :is="Component" v-else />
-    </RouterView>
-    <SettingDrawer />
-  </ElConfigProvider>
-</template>

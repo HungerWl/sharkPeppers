@@ -1,3 +1,16 @@
+<template>
+  <el-tooltip
+    :content="title"
+    placement="bottom"
+  >
+    <div class="tools-item" @click="clickSetting">
+      <el-icon :size="size">
+        <SvgIcon name="EpSetting" />
+      </el-icon>
+    </div>
+  </el-tooltip>
+</template>
+
 <script setup>
 import { computed } from 'vue'
 import mittBus from '@/utils/mitt'
@@ -12,19 +25,6 @@ function clickSetting() {
   mittBus.emit('onShowSettingDrawer')
 }
 </script>
-
-<template>
-  <el-tooltip
-    :content="title"
-    placement="bottom"
-  >
-    <div class="tools-item" @click="clickSetting">
-      <el-icon :size="size">
-        <SvgIcon name="EpSetting" />
-      </el-icon>
-    </div>
-  </el-tooltip>
-</template>
 
 <style scoped>
 .tools-item{

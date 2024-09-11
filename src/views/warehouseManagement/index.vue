@@ -1,3 +1,9 @@
+<template>
+  <div v-loading="load" class="w-full h-full">
+    <iframe src="https://hightopo.com/demo/intelligent-archives/" class="w-full h-full" @load="handleIframeLoad" />
+  </div>
+</template>
+
 <script setup>
 import { ref, watch } from 'vue'
 import { useRoute } from 'vue-router'
@@ -14,9 +20,3 @@ watch(() => route.path, () => {
   linkSrc.value = route.meta?.iframeLink
 }, { immediate: true })
 </script>
-
-<template>
-  <div v-loading="load" class="w-full h-full">
-    <iframe src="https://hightopo.com/demo/intelligent-archives/" class="w-full h-full" @load="handleIframeLoad" />
-  </div>
-</template>

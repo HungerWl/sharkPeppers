@@ -1,66 +1,3 @@
-<script setup>
-import { ref } from 'vue'
-import { useRouter } from 'vue-router'
-import { getMenu } from '../../api/collectionLibrary/collectionLibrary'
-import { useModal } from '@/hooks/useDialog'
-
-const router = useRouter()
-const { showModal } = useModal()
-function openDialog() {
-  showModal(null, {
-    title: '示例弹框',
-    width: '600px',
-    onClose: () => {
-      console.log('弹框已关闭，执行一些逻辑')
-      // 在这里可以执行任何关闭时的逻辑
-    },
-  })
-}
-
-// 功能键
-function directoryFnc() { }
-
-const tableData = ref([])
-for (let i = 0; i < 100; i++) {
-  tableData.value.push({
-    date: '2016-05-02',
-    name: '王小虎',
-    address: '上海市普陀区金沙江路 1518 弄',
-  })
-}
-const pageObj = ref({
-  currentPage: 1,
-  showCount: 50,
-  total: 0,
-})
-
-function size_change() { }
-function current_change() { }
-
-const treeData = ref([])
-const treeProps = {
-  children: 'children',
-  label: 'name',
-}
-function handleNodeClick(data) {
-  console.log(data)
-}
-async function userMenu() {
-  const form = new FormData()
-  form.append('type', 1)
-  const res = await getMenu(form)
-  treeData.value = res
-}
-userMenu()
-
-const tabs = ref([{ name: '待入口' }, { name: '已入口' }, { name: '已退回' }])
-
-// 附件预览
-function attachmentPreview() {
-  window.open('/sharkPeppers/#/attachePreview')
-}
-</script>
-
 <template>
   <el-container id="collectionLibrary" class="p-2">
     <el-aside width="300px" class="left p-2 bg-[#f2e6d8]">
@@ -129,6 +66,69 @@ function attachmentPreview() {
     </el-container>
   </el-container>
 </template>
+
+<script setup>
+import { ref } from 'vue'
+import { useRouter } from 'vue-router'
+import { getMenu } from '../../api/collectionLibrary/collectionLibrary'
+import { useModal } from '@/hooks/useDialog'
+
+const router = useRouter()
+const { showModal } = useModal()
+function openDialog() {
+  showModal(null, {
+    title: '示例弹框',
+    width: '600px',
+    onClose: () => {
+      console.log('弹框已关闭，执行一些逻辑')
+      // 在这里可以执行任何关闭时的逻辑
+    },
+  })
+}
+
+// 功能键
+function directoryFnc() { }
+
+const tableData = ref([])
+for (let i = 0; i < 100; i++) {
+  tableData.value.push({
+    date: '2016-05-02',
+    name: '王小虎',
+    address: '上海市普陀区金沙江路 1518 弄',
+  })
+}
+const pageObj = ref({
+  currentPage: 1,
+  showCount: 50,
+  total: 0,
+})
+
+function size_change() { }
+function current_change() { }
+
+const treeData = ref([])
+const treeProps = {
+  children: 'children',
+  label: 'name',
+}
+function handleNodeClick(data) {
+  console.log(data)
+}
+async function userMenu() {
+  const form = new FormData()
+  form.append('type', 1)
+  const res = await getMenu(form)
+  treeData.value = res
+}
+userMenu()
+
+const tabs = ref([{ name: '待入口' }, { name: '已入口' }, { name: '已退回' }])
+
+// 附件预览
+function attachmentPreview() {
+  window.open('/sharkPeppers/#/attachePreview')
+}
+</script>
 
 <style scoped lang="scss">
 /* 默认背景和文本颜色 */
