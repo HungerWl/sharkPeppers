@@ -5,7 +5,7 @@
   <meta charset="UTF-8">
   <link rel="icon" href="/sharkPeppers/logo.svg">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>后台管理系统模板</title>
+  <title>档案管理系统</title>
 
   <style>
     * {
@@ -108,8 +108,8 @@
     }
   </style>
 
-  <script type="module" crossorigin src="/sharkPeppers/assets/index-C7Qv2pB2.js"></script>
-  <link rel="stylesheet" crossorigin href="/sharkPeppers/assets/index-D_F7sAlq.css">
+  <script type="module" crossorigin src="/sharkPeppers/assets/index-C37co4E6.js"></script>
+  <link rel="stylesheet" crossorigin href="/sharkPeppers/assets/index--np_zqnJ.css">
 </head>
 
 <body>
@@ -122,7 +122,16 @@
         <div class="loading-text">加载中</div>
       </div>
     </div>
-  </div>
+  </div>
+  <script>
+    // 动态加载script
+    const scriptUrl = 'http://192.168.3.203:8091/' + 'web-apps/apps/api/documents/api.js'
+    const script = document.createElement('script')
+    script.src = scriptUrl
+    script.async = false
+    // 将 script 标签添加到 DOM 中
+    document.body.appendChild(script)
+  </script>
 </body>
 
 </html>
