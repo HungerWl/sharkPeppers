@@ -242,4 +242,124 @@ export default [
       }
     },
   },
+  // 统计中心
+  {
+    url: `${baseApi}/statisticsTemplate/executeStatistics`,
+    method: 'post',
+    response: () => {
+      return {
+        status: 200,
+        data: {
+          res1: {
+            data: [
+              {
+                y: 12,
+              },
+              {
+                x: '1231',
+                y: 1,
+              },
+              {
+                x: '1992',
+                y: 21,
+              },
+              {
+                x: '2008',
+                y: 209362,
+              },
+              {
+                x: '2009',
+                y: 196540,
+              },
+              {
+                x: '2010',
+                y: 196560,
+              },
+              {
+                x: '2011',
+                y: 196560,
+              },
+              {
+                x: '2012',
+                y: 196560,
+              },
+              {
+                x: '2013',
+                y: 196560,
+              },
+              {
+                x: '2014',
+                y: 196560,
+              },
+              {
+                x: '2015',
+                y: 196560,
+              },
+              {
+                x: '2016',
+                y: 196560,
+              },
+              {
+                x: '2017',
+                y: 196563,
+              },
+              {
+                x: '2018',
+                y: 196560,
+              },
+              {
+                x: '2019',
+                y: 196560,
+              },
+              {
+                x: '2020',
+                y: 196569,
+              },
+              {
+                x: '2021',
+                y: 196651,
+              },
+              {
+                x: '2022',
+                y: 197841,
+              },
+              {
+                x: '2023',
+                y: 1278842,
+              },
+              {
+                x: '20230301',
+                y: 1,
+              },
+              {
+                x: '2024',
+                y: 7,
+              },
+              {
+                x: '2025',
+                y: 11,
+              },
+              {
+                x: '2027',
+                y: 2,
+              },
+            ],
+            info: {
+              mode: null,
+              layout: null,
+              configJson: null,
+              resName: 'res1',
+              name: '工作量统计',
+              description: null,
+              id: '33d6da12-422f-4865-85e6-1716cc4d6f89',
+              sid: '3e0ae2aa-f400-4b2a-bfe2-ac07fe139d15',
+              // eslint-disable-next-line no-template-curly-in-string
+              sql: 'SELECT\r\n\tCOUNT( 1 ) y,\r\n\ta.ND x \r\nFROM\r\n\ttb_archives_data_usc AS a \r\nWHERE\r\n\ta.CPH = \'${sessionUser}\' \r\nGROUP BY\r\n\ta.ND\r\nORDER BY a.ND',
+            },
+          },
+        },
+        msg: '请求成功',
+      }
+    },
+  },
 ]

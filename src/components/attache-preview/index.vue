@@ -69,7 +69,6 @@ const tabs = ref([
 
 // 获取缩略图
 const itemList = ref([]) // 存储项目列表
-const isLoading = ref(false) // 标识是否正在加载
 async function useImage() {
   const formdata = new FormData()
   formdata.append('tableName', 'usc_cjxtdj')
@@ -80,7 +79,7 @@ async function useImage() {
   itemList.value = res.images
   const dataCount = res.typeCountByAJH
   tabs.value.forEach((item) => {
-    if (dataCount.hasOwnProperty(item.label))
+    if (Object.prototype.hasOwnProperty.call(dataCount, item.label))
       item.count = dataCount[item.label]
   })
 }
